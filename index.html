@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Basit ur Rehman — Data, MLOps & Cloud Engineer</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        theme: {
+                            bg: '#F8F9FA',
+                            card: '#FFFFFF',
+                            darkCard: '#09090B',
+                            text: '#09090B',
+                            muted: '#71717A',
+                            border: '#E4E4E7',
+                            accent: '#8B5CF6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F8F9FA;
+            color: #09090B;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark body {
+            background-color: #09090B;
+            color: #FAFAFA;
+        }
+        .dark .bg-theme-bg { background-color: #09090B; }
+        .dark .bg-theme-card { background-color: #121215; border-color: #27272A; }
+        .dark .text-theme-text { color: #FAFAFA; }
+        .dark .text-theme-muted { color: #A1A1AA; }
+        .dark .border-theme-border { border-color: #27272A; }
+        .dark .bg-gray-100 { background-color: #18181B; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #A855F7 0%, #EC4899 50%, #F97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-badge {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+        .dark .card-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F8F9FA;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #09090B;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4D4D8;
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #27272A;
+        }
+    </style>
+</head>
+<body class="bg-theme-bg text-theme-text antialiased selection:bg-purple-500 selection:text-white">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-theme-bg/90 backdrop-blur-md border-b border-theme-border">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="text-lg font-bold tracking-tight flex items-center gap-2 group">
+                <span class="w-8 h-8 rounded-lg bg-black text-white dark:bg-white dark:text-black font-mono font-bold flex items-center justify-center text-sm group-hover:scale-105 transition-transform">
+                    BR
+                </span>
+                <span class="font-bold text-base tracking-tight">Basit ur Rehman<span class="text-purple-500">.</span></span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-theme-muted">
+                <a href="#about" class="hover:text-theme-text transition-colors" data-i18n="nav-about">About</a>
+                <a href="#education" class="hover:text-theme-text transition-colors" data-i18n="nav-edu">Education</a>
+                <a href="#experience" class="hover:text-theme-text transition-colors" data-i18n="nav-exp">Experience</a>
+                <a href="#skills" class="hover:text-theme-text transition-colors" data-i18n="nav-skills">Skills</a>
+                <a href="#projects" class="hover:text-theme-text transition-colors" data-i18n="nav-projects">Projects</a>
+                <a href="#certifications" class="hover:text-theme-text transition-colors" data-i18n="nav-certs">Certifications</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Language Toggle Button (FR / EN) -->
+                <button id="lang-toggle" onclick="toggleLanguage()" class="px-3 py-2 rounded-full border border-theme-border hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-xs font-mono font-bold text-theme-text flex items-center gap-1.5" title="Switch Language / Changer de Langue">
+                    <i data-lucide="languages" class="w-3.5 h-3.5 text-purple-500"></i>
+                    <span id="lang-label">FR</span>
+                </button>
+
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2.5 rounded-full border border-theme-border hover:bg-gray-100 dark:hover:bg-zinc-800 transition-colors text-theme-muted hover:text-theme-text" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                </button>
+
+                <!-- CV Download Button (Header) -->
+                <a href="cv.pdf" download class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-theme-border hover:border-black dark:hover:border-white text-theme-text font-semibold text-xs tracking-wide transition-all shadow-sm hover:scale-[1.02]">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-purple-500"></i>
+                    <span data-i18n="btn-cv">Download CV</span>
+                </a>
+
+                <!-- Get in Touch CTA -->
+                <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-semibold text-xs tracking-wide transition-all shadow-sm hover:scale-[1.02]">
+                    <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                    <span data-i18n="btn-contact">Get in touch</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-theme-text">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-theme-card border-b border-theme-border px-6 py-4 space-y-3 font-medium text-sm">
+            <a href="#about" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-about">About</a>
+            <a href="#education" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-edu">Education</a>
+            <a href="#experience" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-exp">Experience</a>
+            <a href="#skills" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-skills">Skills</a>
+            <a href="#projects" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-projects">Projects</a>
+            <a href="#certifications" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-certs">Certifications</a>
+            <a href="cv.pdf" download class="block text-purple-600 font-bold flex items-center gap-2">
+                <i data-lucide="download" class="w-4 h-4"></i> <span data-i18n="btn-cv">Download CV</span>
+            </a>
+            <a href="#contact" class="block font-bold text-theme-text" data-i18n="btn-contact">Get in touch →</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 space-y-24 pt-12 pb-24">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-4">
+            
+            <!-- Hero Text Left -->
+            <div class="lg:col-span-7 space-y-8">
+                <!-- Location & Availability Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span data-i18n="hero-badge">Seeking 6-Month Master's Internship (Stage de fin d'études) · Jan/Feb 2027 · Whole France / Remote</span>
+                </div>
+
+                <!-- Main Bold Headline -->
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text leading-[1.12]">
+                    <span data-i18n="hero-title-1">Data Engineer | MLOps : Building scalable</span> <span class="gradient-text" data-i18n="hero-title-2">Data Pipelines, MLOps</span> &amp; <span data-i18n="hero-title-3">Cloud Infra.</span>
+                </h1>
+
+                <!-- Sub-description -->
+                <p class="text-base sm:text-lg text-theme-muted max-w-xl font-normal leading-relaxed">
+                    <span data-i18n="hero-desc-1">Hi, I'm</span> <strong class="text-theme-text font-semibold">Basit ur Rehman</strong>. <span data-i18n="hero-desc-2">I bridge</span> <strong class="text-theme-text font-semibold" data-i18n="hero-desc-3">4+ years of hands-on Cloud Infrastructure experience at u-blox</strong> <span data-i18n="hero-desc-4">with advanced Master's studies in Data Science &amp; Computer Vision in Paris.</span>
+                </p>
+
+                <!-- Primary Action Buttons -->
+                <div class="flex flex-wrap items-center gap-4 pt-2">
+                    <a href="#contact" class="px-7 py-3.5 rounded-full bg-black hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-semibold text-sm transition-all shadow-md hover:scale-[1.02] flex items-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span data-i18n="hero-btn-contact">Contact Me</span>
+                    </a>
+
+                    <a href="cv.pdf" download class="px-6 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-sm transition-all shadow-md hover:scale-[1.02] flex items-center gap-2">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span data-i18n="btn-cv">Download CV</span>
+                    </a>
+                    
+                    <a href="https://github.com/Basitrehmankhattak" target="_blank" rel="noreferrer" class="px-6 py-3.5 rounded-full bg-theme-card border border-theme-border hover:border-black dark:hover:border-white font-semibold text-sm transition-all flex items-center text-theme-text card-shadow">
+                        <span data-i18n="hero-btn-github">GitHub Profile</span>
+                    </a>
+                </div>
+
+                <!-- Quick Tech Tags -->
+                <div class="pt-4 flex flex-wrap items-center gap-2 font-mono text-xs text-theme-muted">
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">AWS &amp; Azure</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">Apache Airflow</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">MLflow</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">Docker &amp; K8s</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">CI/CD</span>
+                </div>
+            </div>
+
+            <!-- Hero Profile Card Right -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="w-full max-w-sm bg-theme-card border border-theme-border rounded-3xl p-6 card-shadow space-y-6 relative overflow-hidden">
+                    <div class="absolute -top-12 -right-12 w-40 h-40 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    <!-- Profile Banner & Graphic -->
+                    <div class="relative bg-gradient-to-br from-purple-500/10 via-pink-500/5 to-orange-500/10 rounded-2xl p-6 border border-purple-500/10 text-center space-y-4">
+                        <div class="relative w-28 h-28 mx-auto">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 blur-md opacity-40 animate-pulse"></div>
+                            <div class="relative w-28 h-28 rounded-full bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-3xl shadow-xl border-2 border-white dark:border-black overflow-hidden">
+                                <img src="profile.jpg" alt="Basit ur Rehman" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://avatars.githubusercontent.com/u/Basitrehmankhattak';" />
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-theme-text">Basit ur Rehman</h2>
+                            <p class="text-xs font-mono text-purple-600 dark:text-purple-400 font-semibold mt-0.5" data-i18n="profile-subtitle">Data Engineer | MLOps Specialist</p>
+                        </div>
+                    </div>
+
+                    <!-- Academic Affiliations -->
+                    <div class="space-y-2 text-xs">
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-theme-border">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-500"></i>
+                                <span class="font-semibold text-theme-text">M2 SIVO</span>
+                            </div>
+                            <a href="https://maps.google.com/?cid=18316442769647812554" target="_blank" class="text-[11px] text-theme-muted hover:text-purple-600 transition-colors">Sorbonne Paris Nord ↗</a>
+                        </div>
+                        <div class="flex items-center justify-between p-2.5 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-theme-border">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="book-open" class="w-4 h-4 text-pink-500"></i>
+                                <span class="font-semibold text-theme-text">M1 Data Science</span>
+                            </div>
+                            <a href="https://maps.google.com/?cid=6348805043946748990" target="_blank" class="text-[11px] text-theme-muted hover:text-pink-600 transition-colors">EPITA ↗</a>
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics / Stats Block -->
+                    <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border text-center">
+                        <div class="text-2xl font-extrabold text-theme-text">4+ Yrs</div>
+                        <div class="text-xs font-medium text-theme-muted mt-0.5" data-i18n="profile-stat-text">u-blox Cloud Infrastructure Experience</div>
+                    </div>
+
+                    <!-- Target Internship Box -->
+                    <div class="p-3.5 rounded-2xl border border-theme-border bg-theme-card flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-2.5">
+                            <i data-lucide="target" class="w-4 h-4 text-purple-500"></i>
+                            <span class="font-semibold text-theme-text" data-i18n="profile-target-title">End-of-Studies Internship</span>
+                        </div>
+                        <span class="font-mono text-[10px] text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md font-bold">JAN/FEB 2027</span>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ABOUT ME SECTION -->
+        <section id="about" class="space-y-8 pt-8 border-t border-theme-border">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Section Title -->
+                <div class="lg:col-span-4 space-y-4">
+                    <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold" data-i18n="about-tag">
+                        Background
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="about-heading">
+                        About Me
+                    </h2>
+                    <p class="text-theme-muted text-sm leading-relaxed" data-i18n="about-sub">
+                        Combining industrial field experience with rigorous master's level studies in data engineering and intelligent systems.
+                    </p>
+                </div>
+
+                <!-- Right Narrative Card -->
+                <div class="lg:col-span-8 bg-theme-card border border-theme-border rounded-3xl p-8 card-shadow space-y-6">
+                    <p class="text-theme-text text-base leading-relaxed">
+                        <strong class="font-semibold text-purple-600 dark:text-purple-400" data-i18n="about-p1">M2 Student in Intelligent Systems &amp; Computer Vision | Ex-Infrastructure Engineer (4+ Years)</strong>
+                    </p>
+                    
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p2">
+                        Currently seeking a <strong>6-month Master's End-of-Studies Internship (Stage de fin d'études)</strong> starting <strong>January / February 2027</strong> in <strong>Whole France or Remote</strong> across <strong>Data Engineering, MLOps, or Cloud Architecture</strong>.
+                    </p>
+
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p3">
+                        With over <strong>4+ years of professional experience</strong> managing AWS/Azure hybrid infrastructure and automation pipelines at u-blox, I specialize in moving data models out of Jupyter Notebooks and building production-ready, containerized systems around them.
+                    </p>
+
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p4">
+                        My academic background combines a B.S. in Computer Engineering, M1 coursework in Data Science &amp; Analytics (EPITA), and a current M2 specialization in Intelligent Systems &amp; Computer Vision (Université Sorbonne Paris Nord). This foundation allows me to bridge the gap between cloud infrastructure and machine learning handling every layer of the modern data stack from cloud orchestration to model deployment.
+                    </p>
+
+                    <!-- Target Banner -->
+                    <div class="p-5 rounded-2xl bg-purple-500/5 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="space-y-1">
+                            <span class="text-xs font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider" data-i18n="about-target-label">TARGET OBJECTIVE</span>
+                            <div class="text-sm font-bold text-theme-text" data-i18n="about-target-val">6-Month End-of-Studies Master's Internship (Stage de fin d'études)</div>
+                            <p class="text-xs text-theme-muted" data-i18n="about-target-sub">Jan / Feb 2027 · Whole France / Remote · Data Engineering, MLOps, Cloud Architecture</p>
+                        </div>
+                        <a href="#contact" class="px-5 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-xs whitespace-nowrap hover:scale-105 transition-transform" data-i18n="about-cta">
+                            Contact Me →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ACADEMIC EDUCATION SECTION -->
+        <section id="education" class="space-y-8 pt-8 border-t border-theme-border">
+            <div class="max-w-xl">
+                <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold mb-2" data-i18n="edu-tag">
+                    Academic Journey
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="edu-heading">
+                    Education
+                </h2>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="edu-sub">
+                    A rigorous academic foundation spanning computer engineering, data science pipelines, and intelligent computer vision systems.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- 1. COMSATS Bachelor Degree -->
+                <div class="p-7 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 flex flex-col justify-between hover:border-purple-500/40 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400" data-i18n="edu-1-type">
+                                BACHELOR OF SCIENCE
+                            </span>
+                            <i data-lucide="award" class="w-4 h-4 text-purple-500"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-1-title">B.S. Computer Engineering</h3>
+                        <div class="space-y-1">
+                            <a href="https://maps.google.com/?cid=9772419226328092052" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1">
+                                COMSATS University ↗
+                            </a>
+                            <p class="text-xs text-theme-muted" data-i18n="edu-1-loc">Lahore, Pakistan · Top Tech &amp; Engineering University</p>
+                        </div>
+                        <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-1-desc">
+                            Core foundation in computer systems architecture, embedded hardware programming, networking, data structures, and algorithms.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[11px] font-mono text-theme-muted font-medium" data-i18n="edu-grad">Graduated</span>
+                    </div>
+                </div>
+
+                <!-- 2. EPITA Master 1 -->
+                <div class="p-7 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 flex flex-col justify-between hover:border-purple-500/40 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-pink-500/10 text-pink-600 dark:text-pink-400" data-i18n="edu-2-type">
+                                MASTER 1 (MSc)
+                            </span>
+                            <i data-lucide="book-open" class="w-4 h-4 text-pink-500"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-2-title">Data Science &amp; Analytics</h3>
+                        <div class="space-y-1">
+                            <a href="https://maps.google.com/?cid=6348805043946748990" target="_blank" rel="noreferrer" class="text-xs font-bold text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-1">
+                                EPITA School of Computer Science ↗
+                            </a>
+                            <p class="text-xs text-theme-muted">Paris, France</p>
+                        </div>
+                        <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-2-desc">
+                            Specialized coursework in data engineering architectures, distributed data processing, advanced machine learning, and database management.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[11px] font-mono text-pink-600 dark:text-pink-400 font-semibold" data-i18n="edu-done">Completed</span>
+                    </div>
+                </div>
+
+                <!-- 3. Sorbonne Paris Nord Master 2 -->
+                <div class="p-7 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 flex flex-col justify-between border-purple-500/30 hover:border-purple-500 transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400" data-i18n="edu-3-type">
+                                MASTER 2 (M2)
+                            </span>
+                            <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-500"></i>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-3-title">Systèmes Intelligents et Vision par Ordinateur (SIVO)</h3>
+                        <div class="space-y-1">
+                            <a href="https://maps.google.com/?cid=18316442769647812554" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1">
+                                Université Sorbonne Paris Nord ↗
+                            </a>
+                            <p class="text-xs text-theme-muted">Paris, France</p>
+                        </div>
+                        <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-3-desc">
+                            Advanced specialization in intelligent computer vision, neural networks, pattern recognition, spatial image processing, and deep learning algorithms.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-purple-600 dark:text-purple-400 font-bold" data-i18n="edu-current">Current M2 Student</span>
+                        <span class="text-[10px] font-mono text-theme-muted">Paris</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PROFESSIONAL EXPERIENCE SECTION -->
+        <section id="experience" class="space-y-8 pt-8 border-t border-theme-border">
+            
+            <div class="max-w-xl">
+                <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold mb-2" data-i18n="exp-tag">
+                    Professional Experience
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="exp-heading">
+                    Work History
+                </h2>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="exp-sub">
+                    Proven record of managing enterprise hybrid cloud infrastructure, database systems, and automating telemetry pipelines across international engineering teams.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+
+                <!-- Role 1: u-blox -->
+                <div class="p-8 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-6 hover:border-purple-500/40 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-theme-border/60">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider">u-blox</span>
+                                <span class="text-xs text-theme-muted font-mono" data-i18n="exp-1-loc">• Thalwil, Zurich, Switzerland (Hybrid)</span>
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-theme-text" data-i18n="exp-1-title">Global Infrastructure Engineer</h3>
+                            <p class="text-xs text-theme-muted font-semibold mt-0.5" data-i18n="exp-1-type">Permanent Role</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="inline-block text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20" data-i18n="exp-1-date">
+                                May 2022 – Sep 2024 · 2 yrs 5 mos
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-theme-text uppercase tracking-wider" data-i18n="exp-resp">Key Responsibilities &amp; Achievements</h4>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-theme-muted leading-relaxed">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b1-k">Cloud &amp; Access Management:</strong> <span data-i18n="exp-1-b1-v">Managed hybrid cloud infrastructure across Azure (Entra ID/Azure AD, VMs, RBAC permissions) and AWS (EC2 instance provisioning, security groups, IAM roles), ensuring strict access control across global teams.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b2-k">On-Premises &amp; Hypervisor Deployment:</strong> <span data-i18n="exp-1-b2-v">Executed on-premises server setups, hardware provisioning, hypervisor configurations (VMware ESXi, Hyper-V), and Linux/Windows OS deployments across international sites.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b3-k">Scripting &amp; System Automation:</strong> <span data-i18n="exp-1-b3-v">Developed Python scripts to automate daily system health checks, log parsing, and routine administrative workflows.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b4-k">Workflow Automation (Jira/Confluence):</strong> <span data-i18n="exp-1-b4-v">Led Jira &amp; Confluence administration; built custom workflows, JQL queries, and REST API automation scripts to streamline tracking, saving 15+ operational hours monthly.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b5-k">System Monitoring &amp; Dashboards:</strong> <span data-i18n="exp-1-b5-v">Configured Grafana telemetry dashboards and automated log alerts to track real-time infrastructure performance and service availability.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b6-k">Server Migrations &amp; Governance:</strong> <span data-i18n="exp-1-b6-v">Collaborated with senior engineering leads to migrate legacy on-premises workloads to hybrid cloud environments; served as CAB Administrator enforcing ITIL change management to ensure zero downtime.</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Azure Administration</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">AWS (EC2/IAM)</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Python Scripting</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Linux Admin</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">VMware ESXi</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Hyper-V</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Grafana</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Jira Admin &amp; JQL</span>
+                    </div>
+                </div>
+
+                <!-- Role 2: Next Generation Technology Solutions -->
+                <div class="p-8 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-6 hover:border-purple-500/40 transition-all">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-theme-border/60">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-xs font-mono font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Next Generation Technology Solutions</span>
+                                <span class="text-xs text-theme-muted font-mono" data-i18n="exp-2-loc">• Lahore, Punjab, Pakistan (On-site)</span>
+                            </div>
+                            <h3 class="text-2xl font-extrabold text-theme-text" data-i18n="exp-2-title">Systems &amp; Data Operations Engineer</h3>
+                            <p class="text-xs text-theme-muted font-semibold mt-0.5" data-i18n="exp-2-type">Full-time Role</p>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="inline-block text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 border border-pink-500/20" data-i18n="exp-2-date">
+                                Sep 2021 – May 2022 · 9 mos
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-mono font-bold text-theme-text uppercase tracking-wider" data-i18n="exp-resp">Key Responsibilities &amp; Achievements</h4>
+                        <ul class="space-y-2.5 text-xs sm:text-sm text-theme-muted leading-relaxed">
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b1-k">Database Operations &amp; SQL Maintenance:</strong> <span data-i18n="exp-2-b1-v">Executed relational database checks and SQL queries (PostgreSQL/MySQL) to audit data records, verify schema connectivity, and assist in operational data troubleshooting.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b2-k">Log Parsing &amp; Diagnostic Scripting:</strong> <span data-i18n="exp-2-b2-v">Developed custom shell and Python diagnostic scripts to parse system logs, automate routine server health checks, and resolve network/authentication bottlenecks.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b3-k">Server Administration &amp; Virtualization:</strong> <span data-i18n="exp-2-b3-v">Delivered L2 infrastructure support across Linux and Windows server environments; executed routine server provisioning, virtualization setups (VMware ESXi), and security patch management.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b4-k">Telemetry &amp; Incident Data Metrics:</strong> <span data-i18n="exp-2-b4-v">Configured ITSM incident tracking workflows (ServiceNow) to structure operational logs and generate regular SLA performance and system uptime reports.</span></span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b5-k">Technical SOPs &amp; Compliance:</strong> <span data-i18n="exp-2-b5-v">Drafted and maintained technical deployment checklists, standard operating procedures (SOPs), and system configuration guides to enforce infrastructure compliance.</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">SQL / PostgreSQL</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Shell Scripting</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Python</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Database Admin</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">VMware ESXi</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">ServiceNow</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- TECHNICAL SKILLS & TOOLS MATRIX SECTION -->
+        <section id="skills" class="space-y-8 pt-8 border-t border-theme-border">
+            
+            <div class="max-w-xl">
+                <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold mb-2" data-i18n="skills-tag">
+                    Tech Stack &amp; Proficiency
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="skills-heading">
+                    Technical Skills Matrix
+                </h2>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="skills-sub">
+                    Comprehensive skill set across Cloud Engineering, Data Engineering, MLOps, and Infrastructure Operations.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Cloud Engineering -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-orange-500/10 text-orange-600 dark:text-orange-400 flex items-center justify-center">
+                            <i data-lucide="cloud" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-theme-text" data-i18n="skill-c1-title">Cloud Engineering</h3>
+                            <span class="text-[10px] font-mono text-theme-muted" data-i18n="skill-c1-sub">AWS, Azure &amp; IaC</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">AWS (EC2, S3, IAM, Glue, Step Functions, Lambda)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Azure (Hybrid Infrastructure, VMs, RBAC)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Docker &amp; Multi-Container Docker Compose</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">GitHub Actions CI/CD</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">VPC &amp; Network Security Configurations</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">AWS CloudWatch &amp; Monitoring</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Data Engineering -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+                            <i data-lucide="database" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-theme-text" data-i18n="skill-c2-title">Data Engineering</h3>
+                            <span class="text-[10px] font-mono text-theme-muted" data-i18n="skill-c2-sub">Pipelines &amp; Warehousing</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Apache Airflow (DAGs &amp; Docker Operators)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">SQL / PostgreSQL &amp; Relational Modeling</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Python (Pandas, ETL, REST API Ingestion)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">dbt (Data Build Tool) &amp; Medallion Architecture</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">AWS Athena &amp; Glue Crawlers</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">FastAPI Backend Services</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: MLOps Engineering -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-pink-500/10 text-pink-600 dark:text-pink-400 flex items-center justify-center">
+                            <i data-lucide="cpu" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-theme-text" data-i18n="skill-c3-title">MLOps Engineering</h3>
+                            <span class="text-[10px] font-mono text-theme-muted" data-i18n="skill-c3-sub">Tracking &amp; Serving</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">MLflow (Registry &amp; Tracking)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">FAISS Vector Search &amp; MiniLM Embeddings</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">PyTorch &amp; LightGBM</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">AWS SageMaker (Monitoring &amp; Pipelines)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">MMR Re-ranking &amp; Retrieval Systems</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Model Containerization &amp; Serving</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Infrastructure & Ops -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                            <i data-lucide="server" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-extrabold text-base text-theme-text" data-i18n="skill-c4-title">Infrastructure &amp; Ops</h3>
+                            <span class="text-[10px] font-mono text-theme-muted" data-i18n="skill-c4-sub">Virtualization &amp; Telemetry</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Linux System Administration &amp; Ubuntu</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Windows Server &amp; WSL Environments</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Shell Scripting &amp; Bash Automation</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Git Version Control &amp; Repository Management</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">IT Infrastructure Troubleshooting &amp; System Health</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Technical Problem-Solving &amp; Documentation</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- FEATURED PROJECTS SHOWCASE -->
+        <section id="projects" class="space-y-8 pt-8 border-t border-theme-border">
+            
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold mb-2" data-i18n="proj-tag">
+                        Portfolio Work
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="proj-heading">
+                        Featured Engineering Projects
+                    </h2>
+                </div>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
+
+                <!-- Project Card 1 -->
+                <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-orange-500/10 text-orange-600 dark:text-orange-400">
+                                CLOUD LAKEHOUSE &amp; MLOPS
+                            </span>
+                            <span class="text-xs text-theme-muted font-mono">2026</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                            AWS Healthcare Big Data &amp; MLOps Platform
+                        </h3>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-1-desc">
+                            An event-driven Medallion (Bronze/Silver/Gold) data lake processing IoT telemetry and clinical batch records inside a private AWS VPC.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">AWS S3</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Step Functions</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Glue ETL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Athena</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">SageMaker Anomaly Detection</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">QuickSight</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">CloudWatch</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-theme-border space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
+                                <a href="https://github.com/Basitrehmankhattak/aws-healthcare-bigdata-platform" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
+                                    <span>github.com/Basitrehmankhattak/healthcare-big-data-platform</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            <a href="https://github.com/Basitrehmankhattak/aws-healthcare-bigdata-platform" target="_blank" class="p-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-transform" title="View Code on GitHub">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400">
+                                MLOPS &amp; VECTOR SEARCH
+                            </span>
+                            <span class="text-xs text-theme-muted font-mono">2026</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                            Semantic News Recommendation Platform
+                        </h3>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-2-desc">
+                            A multi-stage recommendation funnel on the Microsoft MIND dataset featuring sub-millisecond vector retrieval and diversity re-ranking.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Python</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">FastAPI</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">FAISS</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">LightGBM</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">MMR Diversity</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-theme-border space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
+                                <a href="https://github.com/Basitrehmankhattak/news-recommendation-platform" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
+                                    <span>github.com/Basitrehmankhattak/news-recommendation-system</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            <a href="https://github.com/Basitrehmankhattak/news-recommendation-platform" target="_blank" class="p-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-transform" title="View Code on GitHub">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                                INDUSTRIALIZED MLOPS
+                            </span>
+                            <span class="text-xs text-theme-muted font-mono">2026</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            House Prices Industrialized MLOps Pipeline
+                        </h3>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-3-desc">
+                            An enterprise-grade, leak-free machine learning pipeline refactored into a modular Python package with strict code quality standards and automated CI/CD.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Python Package</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Scikit-Learn</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Joblib</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">MLflow</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">PyTest</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Flake8</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">GitHub Actions CI/CD</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-theme-border space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
+                                <a href="https://github.com/Basitrehmankhattak/house-prices-industrialized-mlops" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
+                                    <span>github.com/Basitrehmankhattak/house-prices-mlops-pipeline</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            <a href="https://github.com/Basitrehmankhattak/house-prices-industrialized-mlops" target="_blank" class="p-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-transform" title="View Code on GitHub">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                                END-TO-END CLINICAL SYSTEM
+                            </span>
+                            <span class="text-xs text-theme-muted font-mono">2026</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            HealthVision – End-to-End MLOps Medical Platform
+                        </h3>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-4-desc">
+                            An end-to-end clinical machine learning system with automated Airflow ingestion pipelines, schema validation, REST inference, interactive UI, and live Grafana monitoring.
+                        </p>
+                        
+                        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Apache Airflow</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">FastAPI</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Streamlit</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Grafana</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-theme-border space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
+                                <a href="https://github.com/Basitrehmankhattak/healthvision-diabetes-mlops" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
+                                    <span>github.com/Basitrehmankhattak/HealthVision</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            <a href="https://github.com/Basitrehmankhattak/healthvision-diabetes-mlops" target="_blank" class="p-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-transform" title="View Code on GitHub">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CERTIFICATIONS & PROFESSIONAL CREDENTIALS SECTION -->
+        <section id="certifications" class="space-y-8 pt-8 border-t border-theme-border">
+            
+            <div class="max-w-xl">
+                <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold mb-2" data-i18n="cert-tag">
+                    Verified Credentials
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="cert-heading">
+                    Certifications &amp; Training
+                </h2>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="cert-sub">
+                    Formal industry certifications and specialized data engineering training paths. (You can add certificate badge images named cert1.jpg, cert2.jpg, etc. in your project folder).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Cert 1 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert1.jpg" alt="Associate Data Engineer in SQL" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-purple-500 opacity-60"></i>
+                                <span>Place <code class="text-purple-500 font-mono">cert1.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                DATACAMP PATH
+                            </span>
+                            <i data-lucide="award" class="w-4 h-4 text-blue-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Associate Data Engineer in SQL</h3>
+                        <p class="text-xs font-semibold text-theme-muted">DataCamp · 30-Hour Path</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-1-desc">
+                            Completed DataCamp's 30-hour Associate Data Engineer in SQL certification path. Key focus areas included Kimball dimensional modeling, Star/Snowflake schemas, row vs. columnar database tuning, ELT pipeline architectures, and query execution optimization.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[10px] font-mono text-theme-muted">SQL · Snowflake · Data Warehousing</span>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert2.jpg" alt="Azure Administrator Associate" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-sky-500 opacity-60"></i>
+                                <span>Place <code class="text-sky-500 font-mono">cert2.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                                MICROSOFT AZURE
+                            </span>
+                            <i data-lucide="shield-check" class="w-4 h-4 text-sky-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Azure Administrator Associate</h3>
+                        <p class="text-xs font-semibold text-theme-muted">Microsoft · Credential ID: 591D7ACC47359126</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-2-desc">
+                            Certified in implementing, managing, and monitoring identity, governance, storage, compute, and virtual networks in a cloud environment.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60 flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-theme-muted">Issued Sep 2023</span>
+                        <span class="text-[10px] font-mono text-amber-500">Expired Sep 2024</span>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert3.jpg" alt="Azure Fundamentals" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-sky-500 opacity-60"></i>
+                                <span>Place <code class="text-sky-500 font-mono">cert3.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                                MICROSOFT AZURE
+                            </span>
+                            <i data-lucide="cloud-cog" class="w-4 h-4 text-sky-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Azure Fundamentals (AZ-900)</h3>
+                        <p class="text-xs font-semibold text-theme-muted">Microsoft · Issued Apr 2023</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-3-desc">
+                            Foundational knowledge of cloud concepts, core Azure services, security, privacy, compliance, and trust in cloud infrastructure.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[10px] font-mono text-theme-muted">Cloud Concepts · Security · Pricing</span>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert4.jpg" alt="Azure AI Fundamentals" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-purple-500 opacity-60"></i>
+                                <span>Place <code class="text-purple-500 font-mono">cert4.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400">
+                                MICROSOFT AI
+                            </span>
+                            <i data-lucide="cpu" class="w-4 h-4 text-purple-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Azure AI Fundamentals (AI-900)</h3>
+                        <p class="text-xs font-semibold text-theme-muted">Microsoft · Credential ID: I704-6462</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-4-desc">
+                            Foundational understanding of machine learning and artificial intelligence workloads on Azure, computer vision, and NLP services.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[10px] font-mono text-theme-muted">Issued Apr 2023</span>
+                    </div>
+                </div>
+
+                <!-- Cert 5 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert5.jpg" alt="Certified Python Entry-Level" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-amber-500 opacity-60"></i>
+                                <span>Place <code class="text-amber-500 font-mono">cert5.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                                KODEKLOUD
+                            </span>
+                            <i data-lucide="code" class="w-4 h-4 text-amber-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Certified Python Entry-Level (PCEP)</h3>
+                        <p class="text-xs font-semibold text-theme-muted">KodeKloud · Credential ID: 85EF8A8FB8</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-5-desc">
+                            Verified proficiency in Python programming fundamentals, data structures, conditional branching, loops, functions, and error handling.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[10px] font-mono text-theme-muted">Issued Dec 2022</span>
+                    </div>
+                </div>
+
+                <!-- Cert 6 -->
+                <div class="p-6 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 hover:border-purple-500/40 transition-all flex flex-col justify-between">
+                    <div class="space-y-3">
+                        <!-- Certificate Thumbnail Option -->
+                        <div class="h-32 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border overflow-hidden flex items-center justify-center relative group">
+                            <img src="cert6.jpg" alt="Introduction to ITSM" class="w-full h-full object-cover group-hover:scale-105 transition-transform" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            <div class="absolute inset-0 hidden flex-col items-center justify-center text-theme-muted text-xs p-2 text-center">
+                                <i data-lucide="image" class="w-6 h-6 mb-1 text-blue-500 opacity-60"></i>
+                                <span>Place <code class="text-blue-500 font-mono">cert6.jpg</code> in folder</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400">
+                                ATLASSIAN
+                            </span>
+                            <i data-lucide="check-circle" class="w-4 h-4 text-blue-500"></i>
+                        </div>
+                        <h3 class="text-base font-extrabold text-theme-text">Introduction to ITSM</h3>
+                        <p class="text-xs font-semibold text-theme-muted">Atlassian · Issued Mar 2024</p>
+                        <p class="text-xs text-theme-muted leading-relaxed" data-i18n="cert-6-desc">
+                            Training in IT Service Management methodologies, ITIL change management, and incident workflows utilizing Jira Service Management.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-theme-border/60">
+                        <span class="text-[10px] font-mono text-theme-muted">ITIL · Jira Service Management</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DIRECT MESSAGE & CONTACT FORM SECTION -->
+        <section id="contact" class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8 border-t border-theme-border">
+            
+            <div class="lg:col-span-5 space-y-6">
+                <div class="inline-block px-3 py-1 rounded-full gradient-badge text-purple-600 dark:text-purple-300 font-mono text-xs font-semibold" data-i18n="contact-tag">
+                    Get in Touch
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="contact-heading">
+                    Let's discuss your internship opportunity.
+                </h2>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="contact-sub">
+                    Seeking a 6-month End-of-Studies Master's Internship starting early 2027 in France. Drop me a message below or connect directly via email or GitHub.
+                </p>
+
+                <div class="space-y-4 pt-2">
+                    <a href="mailto:basitrehman97@gmail.com" class="flex items-center gap-3 p-4 rounded-2xl bg-theme-card border border-theme-border hover:border-purple-500/40 transition-all card-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-600 dark:text-purple-400 flex items-center justify-center font-bold">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-theme-muted block" data-i18n="contact-email-lbl">DIRECT EMAIL</span>
+                            <span class="text-sm font-bold text-theme-text">basitrehman97@gmail.com</span>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/Basitrehmankhattak" target="_blank" class="flex items-center gap-3 p-4 rounded-2xl bg-theme-card border border-theme-border hover:border-purple-500/40 transition-all card-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-pink-500/10 text-pink-600 dark:text-pink-400 flex items-center justify-center font-bold">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-theme-muted block" data-i18n="contact-git-lbl">GITHUB REPOSITORIES</span>
+                            <span class="text-sm font-bold text-theme-text">github.com/Basitrehmankhattak</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Message Form Card -->
+            <div class="lg:col-span-7 bg-theme-card border border-theme-border rounded-3xl p-8 card-shadow space-y-6">
+                <div class="space-y-2">
+                    <h3 class="text-xl font-extrabold text-theme-text" data-i18n="form-title">Send a Direct Message</h3>
+                    <p class="text-xs text-theme-muted" data-i18n="form-sub">Fill out the form below and I'll get back to your inbox promptly.</p>
+                </div>
+
+                <form id="direct-message-form" class="space-y-4" onsubmit="handleMessageSubmit(event)">
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-mono font-bold text-theme-text uppercase tracking-wider" data-i18n="form-name">Your Name</label>
+                        <input type="text" id="sender-name" required placeholder="Recruiter Name / Hiring Manager" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-theme-border text-theme-text text-sm focus:outline-none focus:border-purple-500 transition-colors" />
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-mono font-bold text-theme-text uppercase tracking-wider" data-i18n="form-email">Your Email</label>
+                        <input type="email" id="sender-email" required placeholder="recruiter@company.com" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-theme-border text-theme-text text-sm focus:outline-none focus:border-purple-500 transition-colors" />
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-mono font-bold text-theme-text uppercase tracking-wider" data-i18n="form-msg">Message</label>
+                        <textarea id="sender-msg" rows="4" required placeholder="Hello Basit, we would like to discuss a Data Engineering / MLOps internship role..." class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-zinc-900 border border-theme-border text-theme-text text-sm focus:outline-none focus:border-purple-500 transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 px-6 rounded-full bg-black hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-extrabold text-sm transition-all shadow-md flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                        <span data-i18n="form-btn">Send Message</span>
+                    </button>
+                    
+                    <div id="form-success-msg" class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs text-center font-medium" data-i18n="form-success">
+                        ✓ Message prepared! Opening your mail client to send to basitrehman97@gmail.com...
+                    </div>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="border-t border-theme-border py-8 text-center text-xs text-theme-muted font-mono">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div data-i18n="footer-rights">
+                © 2026 Basit ur Rehman. Seeking End-of-Studies Master's Internship (Jan/Feb 2027).
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#hero" class="hover:text-theme-text transition-colors" data-i18n="footer-top">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT & TRANSLATIONS -->
+    <script>
+        const translations = {
+            en: {
+                "nav-about": "About",
+                "nav-edu": "Education",
+                "nav-exp": "Experience",
+                "nav-skills": "Skills",
+                "nav-projects": "Projects",
+                "nav-certs": "Certifications",
+                "btn-cv": "Download CV",
+                "btn-contact": "Get in touch",
+                "hero-badge": "Seeking 6-Month Master's Internship (Stage de fin d'études) · Jan/Feb 2027 · Whole France / Remote",
+                "hero-title-1": "Data Engineer | MLOps : Building scalable",
+                "hero-title-2": "Data Pipelines, MLOps",
+                "hero-title-3": "Cloud Infra.",
+                "hero-desc-1": "Hi, I'm",
+                "hero-desc-2": "I bridge",
+                "hero-desc-3": "4+ years of hands-on Cloud Infrastructure experience at u-blox",
+                "hero-desc-4": "with advanced Master's studies in Data Science & Computer Vision in Paris.",
+                "hero-btn-contact": "Contact Me",
+                "hero-btn-github": "GitHub Profile",
+                "profile-subtitle": "Data Engineer | MLOps Specialist",
+                "profile-stat-text": "u-blox Cloud Infrastructure Experience",
+                "profile-target-title": "End-of-Studies Internship",
+                "about-tag": "Background",
+                "about-heading": "About Me",
+                "about-sub": "Combining industrial field experience with rigorous master's level studies in data engineering and intelligent systems.",
+                "about-p1": "M2 Student in Intelligent Systems & Computer Vision | Ex-Infrastructure Engineer (4+ Years)",
+                "about-p2": "Currently seeking a 6-month Master's End-of-Studies Internship (Stage de fin d'études) starting January / February 2027 in Whole France or Remote across Data Engineering, MLOps, or Cloud Architecture.",
+                "about-p3": "With over 4+ years of professional experience managing AWS/Azure hybrid infrastructure and automation pipelines at u-blox, I specialize in moving data models out of Jupyter Notebooks and building production-ready, containerized systems around them.",
+                "about-p4": "My academic background combines a B.S. in Computer Engineering, M1 coursework in Data Science & Analytics (EPITA), and a current M2 specialization in Intelligent Systems & Computer Vision (Université Sorbonne Paris Nord). This foundation allows me to bridge the gap between cloud infrastructure and machine learning handling every layer of the modern data stack from cloud orchestration to model deployment.",
+                "about-target-label": "TARGET OBJECTIVE",
+                "about-target-val": "6-Month End-of-Studies Master's Internship (Stage de fin d'études)",
+                "about-target-sub": "Jan / Feb 2027 · Whole France / Remote · Data Engineering, MLOps, Cloud Architecture",
+                "about-cta": "Contact Me →",
+                "edu-tag": "Academic Journey",
+                "edu-heading": "Education",
+                "edu-sub": "A rigorous academic foundation spanning computer engineering, data science pipelines, and intelligent computer vision systems.",
+                "edu-1-type": "BACHELOR OF SCIENCE",
+                "edu-1-title": "B.S. Computer Engineering",
+                "edu-1-loc": "Lahore, Pakistan · Top Tech & Engineering University",
+                "edu-1-desc": "Core foundation in computer systems architecture, embedded hardware programming, networking, data structures, and algorithms.",
+                "edu-grad": "Graduated",
+                "edu-2-type": "MASTER 1 (MSc)",
+                "edu-2-title": "Data Science & Analytics",
+                "edu-2-desc": "Specialized coursework in data engineering architectures, distributed data processing, advanced machine learning, and database management.",
+                "edu-done": "Completed",
+                "edu-3-type": "MASTER 2 (M2)",
+                "edu-3-title": "Systèmes Intelligents et Vision par Ordinateur (SIVO)",
+                "edu-3-desc": "Advanced specialization in intelligent computer vision, neural networks, pattern recognition, spatial image processing, and deep learning algorithms.",
+                "edu-current": "Current M2 Student",
+                "exp-tag": "Professional Experience",
+                "exp-heading": "Work History",
+                "exp-sub": "Proven record of managing enterprise hybrid cloud infrastructure, database systems, and automating telemetry pipelines across international engineering teams.",
+                "exp-1-loc": "• Thalwil, Zurich, Switzerland (Hybrid)",
+                "exp-1-title": "Global Infrastructure Engineer",
+                "exp-1-type": "Permanent Role",
+                "exp-1-date": "May 2022 – Sep 2024 · 2 yrs 5 mos",
+                "exp-resp": "Key Responsibilities & Achievements",
+                "exp-1-b1-k": "Cloud & Access Management:",
+                "exp-1-b1-v": "Managed hybrid cloud infrastructure across Azure (Entra ID/Azure AD, VMs, RBAC permissions) and AWS (EC2 instance provisioning, security groups, IAM roles), ensuring strict access control across global teams.",
+                "exp-1-b2-k": "On-Premises & Hypervisor Deployment:",
+                "exp-1-b2-v": "Executed on-premises server setups, hardware provisioning, hypervisor configurations (VMware ESXi, Hyper-V), and Linux/Windows OS deployments across international sites.",
+                "exp-1-b3-k": "Scripting & System Automation:",
+                "exp-1-b3-v": "Developed Python scripts to automate daily system health checks, log parsing, and routine administrative workflows.",
+                "exp-1-b4-k": "Workflow Automation (Jira/Confluence):",
+                "exp-1-b4-v": "Led Jira & Confluence administration; built custom workflows, JQL queries, and REST API automation scripts to streamline tracking, saving 15+ operational hours monthly.",
+                "exp-1-b5-k": "System Monitoring & Dashboards:",
+                "exp-1-b5-v": "Configured Grafana telemetry dashboards and automated log alerts to track real-time infrastructure performance and service availability.",
+                "exp-1-b6-k": "Server Migrations & Governance:",
+                "exp-1-b6-v": "Collaborated with senior engineering leads to migrate legacy on-premises workloads to hybrid cloud environments; served as CAB Administrator enforcing ITIL change management to ensure zero downtime.",
+                "exp-2-loc": "• Lahore, Punjab, Pakistan (On-site)",
+                "exp-2-title": "Systems & Data Operations Engineer",
+                "exp-2-type": "Full-time Role",
+                "exp-2-date": "Sep 2021 – May 2022 · 9 mos",
+                "exp-2-b1-k": "Database Operations & SQL Maintenance:",
+                "exp-2-b1-v": "Executed relational database checks and SQL queries (PostgreSQL/MySQL) to audit data records, verify schema connectivity, and assist in operational data troubleshooting.",
+                "exp-2-b2-k": "Log Parsing & Diagnostic Scripting:",
+                "exp-2-b2-v": "Developed custom shell and Python diagnostic scripts to parse system logs, automate routine server health checks, and resolve network/authentication bottlenecks.",
+                "exp-2-b3-k": "Server Administration & Virtualization:",
+                "exp-2-b3-v": "Delivered L2 infrastructure support across Linux and Windows server environments; executed routine server provisioning, virtualization setups (VMware ESXi), and security patch management.",
+                "exp-2-b4-k": "Telemetry & Incident Data Metrics:",
+                "exp-2-b4-v": "Configured ITSM incident tracking workflows (ServiceNow) to structure operational logs and generate regular SLA performance and system uptime reports.",
+                "exp-2-b5-k": "Technical SOPs & Compliance:",
+                "exp-2-b5-v": "Drafted and maintained technical deployment checklists, standard operating procedures (SOPs), and system configuration guides to enforce infrastructure compliance.",
+                "skills-tag": "Tech Stack & Proficiency",
+                "skills-heading": "Technical Skills Matrix",
+                "skills-sub": "Comprehensive skill set across Cloud Engineering, Data Engineering, MLOps, and Infrastructure Operations.",
+                "skill-c1-title": "Cloud Engineering",
+                "skill-c1-sub": "AWS, Azure & IaC",
+                "skill-c2-title": "Data Engineering",
+                "skill-c2-sub": "Pipelines & Warehousing",
+                "skill-c3-title": "MLOps Engineering",
+                "skill-c3-sub": "Tracking & Serving",
+                "skill-c4-title": "Infrastructure & Ops",
+                "skill-c4-sub": "Virtualization & Télémétrie",
+                "proj-tag": "Portfolio Work",
+                "proj-heading": "Featured Engineering Projects",
+                "proj-1-desc": "An event-driven Medallion (Bronze/Silver/Gold) data lake processing IoT telemetry and clinical batch records inside a private AWS VPC.",
+                "proj-2-desc": "A multi-stage recommendation funnel on the Microsoft MIND dataset featuring sub-millisecond vector retrieval and diversity re-ranking.",
+                "proj-3-desc": "An enterprise-grade, leak-free machine learning pipeline refactored into a modular Python package with strict code quality standards and automated CI/CD.",
+                "proj-4-desc": "An end-to-end clinical machine learning system with automated Airflow ingestion pipelines, schema validation, REST inference, interactive UI, and live Grafana monitoring.",
+                "proj-repo": "REPOSITORY LINK",
+                "cert-tag": "Verified Credentials",
+                "cert-heading": "Certifications & Training",
+                "cert-sub": "Formal industry certifications and specialized data engineering training paths.",
+                "cert-1-desc": "Completed DataCamp's 30-hour Associate Data Engineer in SQL certification path. Key focus areas included Kimball dimensional modeling, Star/Snowflake schemas, row vs. columnar database tuning, ELT pipeline architectures, and query execution optimization.",
+                "cert-2-desc": "Certified in implementing, managing, and monitoring identity, governance, storage, compute, and virtual networks in a cloud environment.",
+                "cert-3-desc": "Foundational knowledge of cloud concepts, core Azure services, security, privacy, compliance, and trust in cloud infrastructure.",
+                "cert-4-desc": "Foundational understanding of machine learning and artificial intelligence workloads on Azure, computer vision, and NLP services.",
+                "cert-5-desc": "Verified proficiency in Python programming fundamentals, data structures, conditional branching, loops, functions, and error handling.",
+                "cert-6-desc": "Training in IT Service Management methodologies, ITIL change management, and incident workflows utilizing Jira Service Management.",
+                "contact-tag": "Get in Touch",
+                "contact-heading": "Let's discuss your internship opportunity.",
+                "contact-sub": "Seeking a 6-month End-of-Studies Master's Internship starting early 2027 in France. Drop me a message below or connect directly via email or GitHub.",
+                "contact-email-lbl": "DIRECT EMAIL",
+                "contact-git-lbl": "GITHUB REPOSITORIES",
+                "form-title": "Send a Direct Message",
+                "form-sub": "Fill out the form below and I'll get back to your inbox promptly.",
+                "form-name": "Your Name",
+                "form-email": "Your Email",
+                "form-msg": "Message",
+                "form-btn": "Send Message",
+                "form-success": "✓ Message prepared! Opening your mail client to send to basitrehman97@gmail.com...",
+                "footer-rights": "© 2026 Basit ur Rehman. Seeking End-of-Studies Master's Internship (Jan/Feb 2027).",
+                "footer-top": "Back to top ↑"
+            },
+            fr: {
+                "nav-about": "À propos",
+                "nav-edu": "Formation",
+                "nav-exp": "Expérience",
+                "nav-skills": "Compétences",
+                "nav-projects": "Projets",
+                "nav-certs": "Certifications",
+                "btn-cv": "Télécharger CV",
+                "btn-contact": "Me contacter",
+                "hero-badge": "Recherche Stage de fin d'études (M2) · Janv/Fév 2027 · Toute la France / Télétravail",
+                "hero-title-1": "Ingénieur Data | MLOps : Conception de",
+                "hero-title-2": "Pipelines Data, MLOps",
+                "hero-title-3": "& Infrastructure Cloud.",
+                "hero-desc-1": "Bonjour, je suis",
+                "hero-desc-2": "Je combine",
+                "hero-desc-3": "4+ ans d'expérience pratique en infrastructure cloud chez u-blox",
+                "hero-desc-4": "avec des études approfondies en Master de Data Science & Vision par Ordinateur à Paris.",
+                "hero-btn-contact": "Me Contacter",
+                "hero-btn-github": "Profil GitHub",
+                "profile-subtitle": "Ingénieur Data | Spécialiste MLOps",
+                "profile-stat-text": "Expérience Infrastructure Cloud u-blox",
+                "profile-target-title": "Stage de Fin d'Études",
+                "about-tag": "Parcours",
+                "about-heading": "À Propos de Moi",
+                "about-sub": "Alliant expérience industrielle sur le terrain et formation universitaire rigoureuse en ingénierie des données et systèmes intelligents.",
+                "about-p1": "Étudiant en M2 Systèmes Intelligents & Vision par Ordinateur | Ex-Ingénieur Infrastructure (4+ Ans)",
+                "about-p2": "Actuellement à la recherche d'un <strong>Stage de fin d'études de 6 mois</strong> débutant en <strong>janvier / février 2027</strong> en <strong>toute la France ou en télétravail</strong> en tant qu'ingénieur Data, MLOps ou Cloud.",
+                "about-p3": "Fort de plus de <strong>4 ans d'expérience professionnelle</strong> dans la gestion d'infrastructures cloud hybrides et de pipelines d'automatisation chez u-blox, je me spécialise dans le passage des modèles de données des notebooks Jupyter vers des systèmes conteneurisés prêts pour la production.",
+                "about-p4": "Mon parcours combine un Bachelor en Génie Informatique, un M1 en Data Science & Analytics (EPITA), et une spécialisation actuelle en M2 SIVO (Université Sorbonne Paris Nord). Cela me permet de faire le pont entre l'infrastructure cloud et le machine learning de bout en bout.",
+                "about-target-label": "OBJECTIF PRINCIPAL",
+                "about-target-val": "Stage de Fin d'Études de 6 Mois (Master 2)",
+                "about-target-sub": "Janv / Fév 2027 · Toute la France / Télétravail · Data Engineering, MLOps, Cloud",
+                "about-cta": "Me Contacter →",
+                "edu-tag": "Parcours Académique",
+                "edu-heading": "Formation",
+                "edu-sub": "Un socle académique rigoureux couvrant le génie informatique, les pipelines de données et la vision par ordinateur.",
+                "edu-1-type": "BAC+4 / BACHELOR",
+                "edu-1-title": "B.S. Génie Informatique",
+                "edu-1-loc": "Lahore, Pakistan · Université technologique de premier plan",
+                "edu-1-desc": "Fondations en architecture des systèmes informatiques, programmation embarquée, réseaux, structures de données et algorithmes.",
+                "edu-grad": "Diplômé",
+                "edu-2-type": "MASTER 1 (MSc)",
+                "edu-2-title": "Data Science & Analytics",
+                "edu-2-desc": "Cours spécialisés en architectures de données, traitement distribué, machine learning avancé et gestion de bases de données.",
+                "edu-done": "Validé",
+                "edu-3-type": "MASTER 2 (M2)",
+                "edu-3-title": "Systèmes Intelligents et Vision par Ordinateur (SIVO)",
+                "edu-3-desc": "Spécialisation avancée en vision par ordinateur intelligente, réseaux de neurones, reconnaissance de formes et apprentissage profond.",
+                "edu-current": "Étudiant en M2 Actuel",
+                "exp-tag": "Expérience Professionnelle",
+                "exp-heading": "Historique Professionnel",
+                "exp-sub": "Expérience avérée dans la gestion d'infrastructures cloud hybrides d'entreprise, de bases de données et l'automatisation de pipelines de télémétrie.",
+                "exp-1-loc": "• Thalwil, Zurich, Suisse (Hybride)",
+                "exp-1-title": "Ingénieur Infrastructure Global",
+                "exp-1-type": "Poste Permanent",
+                "exp-1-date": "Mai 2022 – Sep 2024 · 2 ans 5 mois",
+                "exp-resp": "Responsabilités & Réalisations Clés",
+                "exp-1-b1-k": "Gestion Cloud & Accès :",
+                "exp-1-b1-v": "Gestion d'infrastructures cloud hybrides sur Azure (Entra ID/Azure AD, VMs, RBAC) et AWS (provisionnement EC2, groupes de sécurité, rôles IAM), garantissant un contrôle d'accès strict.",
+                "exp-1-b2-k": "Déploiement Sur Site & Hyperviseurs :",
+                "exp-1-b2-v": "Mise en place de serveurs sur site, provisionnement matériel, configuration d'hyperviseurs (VMware ESXi, Hyper-V) et déploiements OS Linux/Windows.",
+                "exp-1-b3-k": "Scripting & Automatisation Système :",
+                "exp-1-b3-v": "Développement de scripts Python pour automatiser les bilans de santé quotidiens, l'analyse de logs et les flux administratifs.",
+                "exp-1-b4-k": "Automatisation des Workflows (Jira/Confluence) :",
+                "exp-1-b4-v": "Administration Jira & Confluence ; création de workflows personnalisés et scripts d'automatisation REST API (gain de 15+ heures par mois).",
+                "exp-1-b5-k": "Supervision & Tableaux de Bord :",
+                "exp-1-b5-v": "Configuration de tableaux de bord Grafana et alertes automatisées pour suivre les performances et la disponibilité des services.",
+                "exp-1-b6-k": "Migrations de Serveurs & Gouvernance :",
+                "exp-1-b6-v": "Migration de charges de travail vers des environnements cloud hybrides ; rôle d'administrateur CAB appliquant la gestion des changements ITIL.",
+                "exp-2-loc": "• Lahore, Pendjab, Pakistan (Sur site)",
+                "exp-2-title": "Ingénieur Opérations Systèmes & Data",
+                "exp-2-type": "Temps Plein",
+                "exp-2-date": "Sep 2021 – Mai 2022 · 9 mois",
+                "exp-2-b1-k": "Opérations BDD & Maintenance SQL :",
+                "exp-2-b1-v": "Exécution de requêtes SQL (PostgreSQL/MySQL) pour auditer les données, vérifier la connectivité et résoudre les problèmes opérationnels.",
+                "exp-2-b2-k": "Analyse de Logs & Scripts de Diagnostic :",
+                "exp-2-b2-v": "Création de scripts shell et Python pour analyser les logs système, automatiser les contrôles de santé et résoudre les goulots d'étranglement.",
+                "exp-2-b3-k": "Administration Serveurs & Virtualisation :",
+                "exp-2-b3-v": "Support infrastructure L2 sur environnements Linux et Windows ; provisionnement de serveurs, virtualisation (VMware ESXi) et correctifs de sécurité.",
+                "exp-2-b4-k": "Métriques de Télémétrie & Incidents :",
+                "exp-2-b4-v": "Configuration des flux ITSM (ServiceNow) pour structurer les journaux opérationnels et générer des rapports de performance SLA.",
+                "exp-2-b5-k": "SOPs Techniques & Conformité :",
+                "exp-2-b5-v": "Rédaction et mise à jour de checklists de déploiement et de guides de configuration pour assurer la conformité de l'infrastructure.",
+                "skills-tag": "Stack Technique & Maîtrise",
+                "skills-heading": "Matrice des Compétences Techniques",
+                "skills-sub": "Ensemble complet de compétences en ingénierie cloud, ingénierie des données, MLOps et opérations d'infrastructure.",
+                "skill-c1-title": "Ingénierie Cloud",
+                "skill-c1-sub": "AWS, Azure & IaC",
+                "skill-c2-title": "Ingénierie des Données",
+                "skill-c2-sub": "Pipelines & Stockage",
+                "skill-c3-title": "Ingénierie MLOps",
+                "skill-c3-sub": "Suivi & Déploiement",
+                "skill-c4-title": "Infrastructure & Ops",
+                "skill-c4-sub": "Virtualisation & Télémétrie",
+                "proj-tag": "Projets Portfolio",
+                "proj-heading": "Projets d'Ingénierie Phares",
+                "proj-1-desc": "Un lac de données Medallion (Bronze/Silver/Gold) piloté par événements traitant la télémétrie IoT et les dossiers cliniques dans un VPC AWS privé.",
+                "proj-2-desc": "Un entonnoir de recommandation multi-étages sur le jeu de données Microsoft MIND avec recherche vectorielle sub-milliseconde et ré-classement par diversité.",
+                "proj-3-desc": "Pipeline de machine learning industrialisé sans fuite de données, refactorisé en package Python modulaire avec normes de qualité strictes et CI/CD automatisée.",
+                "proj-4-desc": "Système de ML clinique de bout en bout avec pipelines d'ingestion Airflow automatisés, validation de schéma, inférence REST, interface interactive et supervision Grafana.",
+                "proj-repo": "LIEN DU DÉPÔT",
+                "cert-tag": "Certifications Vérifiées",
+                "cert-heading": "Certifications & Formations",
+                "cert-sub": "Certifications industrielles officielles et parcours de formation en ingénierie des données.",
+                "cert-1-desc": "Parcours DataCamp de 30 heures d'ingénieur data associé en SQL. Accent sur la modélisation dimensionnelle de Kimball, schémas en étoile/flocon, tuning de bases de données et architectures ELT.",
+                "cert-2-desc": "Certifié dans la mise en œuvre, la gestion et la surveillance des identités, de la gouvernance, du stockage, du calcul et des réseaux virtuels sur Azure.",
+                "cert-3-desc": "Connaissances fondamentales des concepts cloud, des services Azure de base, de la sécurité, de la confidentialité et de la conformité.",
+                "cert-4-desc": "Compréhension fondamentale des charges de travail de machine learning et d'intelligence artificielle sur Azure, de la vision par ordinateur et du NLP.",
+                "cert-5-desc": "Maîtrise vérifiée des fondamentaux de la programmation Python, des structures de données, des boucles, des fonctions et de la gestion des erreurs.",
+                "cert-6-desc": "Formation aux méthodologies de gestion des services informatiques (ITSM), gestion des changements ITIL et workflows d'incidents Jira Service Management.",
+                "contact-tag": "Contact",
+                "contact-heading": "Discutons de votre opportunité de stage.",
+                "contact-sub": "Recherche un stage de fin d'études M2 de 6 mois débutant début 2027 en France. Envoyez-moi un message ci-dessous ou contactez-moi par e-mail / GitHub.",
+                "contact-email-lbl": "E-MAIL DIRECT",
+                "contact-git-lbl": "DÉPÔTS GITHUB",
+                "form-title": "Envoyer un Message Direct",
+                "form-sub": "Remplissez le formulaire ci-dessous et je vous répondrai rapidement.",
+                "form-name": "Votre Nom",
+                "form-email": "Votre E-mail",
+                "form-msg": "Message",
+                "form-btn": "Envoyer le Message",
+                "form-success": "✓ Message préparé ! Ouverture de votre client mail pour l'envoyer à basitrehman97@gmail.com...",
+                "footer-rights": "© 2026 Basit ur Rehman. Recherche Stage de Fin d'Études (Janv/Fév 2027).",
+                "footer-top": "Retour en haut ↑"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'fr' : 'en';
+            document.getElementById('lang-label').innerText = currentLang.toUpperCase();
+            
+            // Translate all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.innerHTML = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Initialize Lucide Icons & Interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+
+            // Light / Dark Theme Switcher
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+
+            // Mobile Navigation Toggle
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        });
+
+        // Handle Direct Message Submission via mailto trigger
+        function handleMessageSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('sender-name').value;
+            const email = document.getElementById('sender-email').value;
+            const msg = document.getElementById('sender-msg').value;
+
+            const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+            const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`);
+            
+            const successDiv = document.getElementById('form-success-msg');
+            successDiv.classList.remove('hidden');
+
+            setTimeout(() => {
+                window.location.href = `mailto:basitrehman97@gmail.com?subject=${subject}&body=${body}`;
+            }, 800);
+        }
+    </script>
+</body>
+</html>
