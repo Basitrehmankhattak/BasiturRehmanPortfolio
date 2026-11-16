@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Basit ur Rehman — Data, MLOps & Cloud Engineer</title>
+    <title id="page-title">Basit ur Rehman — Data Engineer / Analytics Engineer Intern</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -131,10 +131,18 @@
                 </button>
 
                 <!-- CV Download Button (Header) -->
-                <a href="cv.pdf" download class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-theme-border hover:border-black dark:hover:border-white text-theme-text font-semibold text-xs tracking-wide transition-all shadow-sm hover:scale-[1.02]">
-                    <i data-lucide="download" class="w-3.5 h-3.5 text-purple-500"></i>
-                    <span data-i18n="btn-cv">Download CV</span>
-                </a>
+                <div class="hidden sm:block"><div class="relative cv-menu" id="cv-menu-header">
+                    <button type="button" onclick="toggleCvMenu('cv-menu-header')" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-theme-border hover:border-black dark:hover:border-white text-theme-text font-semibold text-xs tracking-wide transition-all shadow-sm">
+                        <i data-lucide="download" class="w-3.5 h-3.5 text-purple-500"></i>
+                        <span data-i18n="btn-cv">Download CV</span> <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
+                    </button>
+                    <div class="cv-panel hidden absolute right-0 mt-2 w-64 z-50 rounded-2xl bg-theme-card border border-theme-border card-shadow p-2 space-y-1 text-left">
+                        <div class="px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-wider text-theme-muted" data-i18n="cv-title">Choose a version</div>
+                        <button type="button" onclick="downloadCV('en')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400">EN</span><span data-i18n="cv-en">English CV (PDF)</span></button>
+                        <button type="button" onclick="downloadCV('fr')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-500/10 text-pink-600 dark:text-pink-400">FR</span><span data-i18n="cv-fr">French CV (PDF)</span></button>
+                        <button type="button" onclick="downloadCV('both')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border-t border-theme-border hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">EN+FR</span><span data-i18n="cv-both">Download both</span></button>
+                    </div>
+                </div></div>
 
                 <!-- Get in Touch CTA -->
                 <a href="#contact" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black hover:bg-zinc-800 dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black font-semibold text-xs tracking-wide transition-all shadow-sm hover:scale-[1.02]">
@@ -157,9 +165,14 @@
             <a href="#skills" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-skills">Skills</a>
             <a href="#projects" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-projects">Projects</a>
             <a href="#certifications" class="block text-theme-muted hover:text-theme-text" data-i18n="nav-certs">Certifications</a>
-            <a href="cv.pdf" download class="block text-purple-600 font-bold flex items-center gap-2">
-                <i data-lucide="download" class="w-4 h-4"></i> <span data-i18n="btn-cv">Download CV</span>
-            </a>
+            <div class="space-y-2">
+                <div class="text-purple-600 font-bold flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i> <span data-i18n="btn-cv">Download CV</span></div>
+                <div class="flex flex-wrap gap-2 pl-6">
+                    <button type="button" onclick="downloadCV('en')" class="px-3 py-1.5 rounded-full border border-theme-border text-xs font-semibold text-theme-text">EN</button>
+                    <button type="button" onclick="downloadCV('fr')" class="px-3 py-1.5 rounded-full border border-theme-border text-xs font-semibold text-theme-text">FR</button>
+                    <button type="button" onclick="downloadCV('both')" class="px-3 py-1.5 rounded-full border border-theme-border text-xs font-semibold text-theme-text" data-i18n="cv-both">Download both</button>
+                </div>
+            </div>
             <a href="#contact" class="block font-bold text-theme-text" data-i18n="btn-contact">Get in touch →</a>
         </div>
     </header>
@@ -174,17 +187,17 @@
                 <!-- Location & Availability Badge -->
                 <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span data-i18n="hero-badge">Seeking 6-Month Master's Internship (Stage de fin d'études) · Jan/Feb 2027 · Whole France / Remote</span>
+                    <span data-i18n="hero-badge">Seeking 6-Month End-of-Studies Internship (Stage de fin d'études) · Feb/Mar 2027 · Île-de-France</span>
                 </div>
 
                 <!-- Main Bold Headline -->
                 <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text leading-[1.12]">
-                    <span data-i18n="hero-title-1">Data Engineer | MLOps : Building scalable</span> <span class="gradient-text" data-i18n="hero-title-2">Data Pipelines, MLOps</span> &amp; <span data-i18n="hero-title-3">Cloud Infra.</span>
+                    <span data-i18n="hero-title-1">Data Engineer / Analytics Engineer Intern: Building tested</span> <span class="gradient-text" data-i18n="hero-title-2">ELT Pipelines</span> &amp; <span data-i18n="hero-title-3">Observable Data Platforms.</span>
                 </h1>
 
                 <!-- Sub-description -->
                 <p class="text-base sm:text-lg text-theme-muted max-w-xl font-normal leading-relaxed">
-                    <span data-i18n="hero-desc-1">Hi, I'm</span> <strong class="text-theme-text font-semibold">Basit ur Rehman</strong>. <span data-i18n="hero-desc-2">I bridge</span> <strong class="text-theme-text font-semibold" data-i18n="hero-desc-3">4+ years of hands-on Cloud Infrastructure experience at u-blox</strong> <span data-i18n="hero-desc-4">with advanced Master's studies in Data Science &amp; Computer Vision in Paris.</span>
+                    <span data-i18n="hero-desc-1">Hi, I'm</span> <strong class="text-theme-text font-semibold">Basit ur Rehman</strong>. <span data-i18n="hero-desc-2">I bridge</span> <strong class="text-theme-text font-semibold" data-i18n="hero-desc-3">3+ years of hands-on production infrastructure experience at u-blox and NGT Sol</strong> <span data-i18n="hero-desc-4">with M2 studies in Intelligent Systems &amp; Computer Vision in Paris.</span>
                 </p>
 
                 <!-- Primary Action Buttons -->
@@ -194,10 +207,18 @@
                         <span data-i18n="hero-btn-contact">Contact Me</span>
                     </a>
 
-                    <a href="cv.pdf" download class="px-6 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-sm transition-all shadow-md hover:scale-[1.02] flex items-center gap-2">
+                    <div class="relative cv-menu" id="cv-menu-hero">
+                    <button type="button" onclick="toggleCvMenu('cv-menu-hero')" aria-haspopup="true" aria-expanded="false" class="px-6 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold text-sm transition-all shadow-md hover:scale-[1.02] flex items-center gap-2">
                         <i data-lucide="download" class="w-4 h-4"></i>
-                        <span data-i18n="btn-cv">Download CV</span>
-                    </a>
+                        <span data-i18n="btn-cv">Download CV</span> <i data-lucide="chevron-down" class="w-3.5 h-3.5 opacity-70"></i>
+                    </button>
+                    <div class="cv-panel hidden absolute left-0 mt-2 w-64 z-50 rounded-2xl bg-theme-card border border-theme-border card-shadow p-2 space-y-1 text-left">
+                        <div class="px-3 pt-2 pb-1 text-[10px] font-mono uppercase tracking-wider text-theme-muted" data-i18n="cv-title">Choose a version</div>
+                        <button type="button" onclick="downloadCV('en')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-600 dark:text-purple-400">EN</span><span data-i18n="cv-en">English CV (PDF)</span></button>
+                        <button type="button" onclick="downloadCV('fr')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-pink-500/10 text-pink-600 dark:text-pink-400">FR</span><span data-i18n="cv-fr">French CV (PDF)</span></button>
+                        <button type="button" onclick="downloadCV('both')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border-t border-theme-border hover:bg-gray-100 dark:hover:bg-zinc-800 text-sm font-semibold text-theme-text"><span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">EN+FR</span><span data-i18n="cv-both">Download both</span></button>
+                    </div>
+                </div>
                     
                     <a href="https://github.com/Basitrehmankhattak" target="_blank" rel="noreferrer" class="px-6 py-3.5 rounded-full bg-theme-card border border-theme-border hover:border-black dark:hover:border-white font-semibold text-sm transition-all flex items-center text-theme-text card-shadow">
                         <span data-i18n="hero-btn-github">GitHub Profile</span>
@@ -208,8 +229,8 @@
                 <div class="pt-4 flex flex-wrap items-center gap-2 font-mono text-xs text-theme-muted">
                     <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">AWS &amp; Azure</span>
                     <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">Apache Airflow</span>
-                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">MLflow</span>
-                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">Docker &amp; K8s</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">dbt Core</span>
+                    <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">Docker &amp; Compose</span>
                     <span class="px-3 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border">CI/CD</span>
                 </div>
             </div>
@@ -229,7 +250,7 @@
                         </div>
                         <div>
                             <h2 class="text-xl font-bold text-theme-text">Basit ur Rehman</h2>
-                            <p class="text-xs font-mono text-purple-600 dark:text-purple-400 font-semibold mt-0.5" data-i18n="profile-subtitle">Data Engineer | MLOps Specialist</p>
+                            <p class="text-xs font-mono text-purple-600 dark:text-purple-400 font-semibold mt-0.5" data-i18n="profile-subtitle">Data Engineer / Analytics Engineer Intern</p>
                         </div>
                     </div>
 
@@ -253,8 +274,8 @@
 
                     <!-- Key Metrics / Stats Block -->
                     <div class="p-4 rounded-2xl bg-gray-50 dark:bg-zinc-900 border border-theme-border text-center">
-                        <div class="text-2xl font-extrabold text-theme-text">4+ Yrs</div>
-                        <div class="text-xs font-medium text-theme-muted mt-0.5" data-i18n="profile-stat-text">u-blox Cloud Infrastructure Experience</div>
+                        <div class="text-2xl font-extrabold text-theme-text">3+ Yrs</div>
+                        <div class="text-xs font-medium text-theme-muted mt-0.5" data-i18n="profile-stat-text">Production Infrastructure Experience (u-blox, NGT Sol)</div>
                     </div>
 
                     <!-- Target Internship Box -->
@@ -263,7 +284,7 @@
                             <i data-lucide="target" class="w-4 h-4 text-purple-500"></i>
                             <span class="font-semibold text-theme-text" data-i18n="profile-target-title">End-of-Studies Internship</span>
                         </div>
-                        <span class="font-mono text-[10px] text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md font-bold">JAN/FEB 2027</span>
+                        <span class="font-mono text-[10px] text-purple-600 dark:text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md font-bold">FEB/MAR 2027</span>
                     </div>
                 </div>
             </div>
@@ -290,27 +311,21 @@
                 <!-- Right Narrative Card -->
                 <div class="lg:col-span-8 bg-theme-card border border-theme-border rounded-3xl p-8 card-shadow space-y-6">
                     <p class="text-theme-text text-base leading-relaxed">
-                        <strong class="font-semibold text-purple-600 dark:text-purple-400" data-i18n="about-p1">M2 Student in Intelligent Systems &amp; Computer Vision | Ex-Infrastructure Engineer (4+ Years)</strong>
+                        <strong class="font-semibold text-purple-600 dark:text-purple-400" data-i18n="about-p1">M2 Student in Intelligent Systems &amp; Computer Vision | Ex-Infrastructure Engineer (3+ Years)</strong>
                     </p>
                     
-                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p2">
-                        Currently seeking a <strong>6-month Master's End-of-Studies Internship (Stage de fin d'études)</strong> starting <strong>January / February 2027</strong> in <strong>Whole France or Remote</strong> across <strong>Data Engineering, MLOps, or Cloud Architecture</strong>.
-                    </p>
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p2">Seeking a <strong>6-month End-of-Studies Internship (Stage de fin d'études)</strong> starting <strong>February / March 2027</strong> in <strong>Île-de-France</strong> as a <strong>Data Engineer or Analytics Engineer</strong>. Convention de stage provided by Université Sorbonne Paris Nord.</p>
 
-                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p3">
-                        With over <strong>4+ years of professional experience</strong> managing AWS/Azure hybrid infrastructure and automation pipelines at u-blox, I specialize in moving data models out of Jupyter Notebooks and building production-ready, containerized systems around them.
-                    </p>
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p3">With <strong>3+ years of production infrastructure experience</strong> at u-blox and NGT Sol, I build tested, observable ELT pipelines with Python, SQL, dbt Core, Airflow and Docker, and bring an operations mindset: monitoring, automation and data quality.</p>
 
-                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p4">
-                        My academic background combines a B.S. in Computer Engineering, M1 coursework in Data Science &amp; Analytics (EPITA), and a current M2 specialization in Intelligent Systems &amp; Computer Vision (Université Sorbonne Paris Nord). This foundation allows me to bridge the gap between cloud infrastructure and machine learning handling every layer of the modern data stack from cloud orchestration to model deployment.
-                    </p>
+                    <p class="text-theme-text text-base leading-relaxed" data-i18n="about-p4">My background combines a B.S. in Computer Engineering, 3 semesters (90 ECTS) of the MSc Data Science &amp; AI at EPITA, and a current M2 in Intelligent Systems &amp; Computer Vision (Université Sorbonne Paris Nord). It lets me bridge cloud infrastructure and data engineering, from orchestration and warehousing to model serving.</p>
 
                     <!-- Target Banner -->
                     <div class="p-5 rounded-2xl bg-purple-500/5 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div class="space-y-1">
                             <span class="text-xs font-mono font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider" data-i18n="about-target-label">TARGET OBJECTIVE</span>
-                            <div class="text-sm font-bold text-theme-text" data-i18n="about-target-val">6-Month End-of-Studies Master's Internship (Stage de fin d'études)</div>
-                            <p class="text-xs text-theme-muted" data-i18n="about-target-sub">Jan / Feb 2027 · Whole France / Remote · Data Engineering, MLOps, Cloud Architecture</p>
+                            <div class="text-sm font-bold text-theme-text" data-i18n="about-target-val">6-Month End-of-Studies Internship (Stage de fin d'études)</div>
+                            <p class="text-xs text-theme-muted" data-i18n="about-target-sub">Feb / Mar 2027 · Île-de-France · Data Engineering, Analytics Engineering</p>
                         </div>
                         <a href="#contact" class="px-5 py-2.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-xs whitespace-nowrap hover:scale-105 transition-transform" data-i18n="about-cta">
                             Contact Me →
@@ -351,7 +366,7 @@
                             <a href="https://maps.google.com/?cid=9772419226328092052" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1">
                                 COMSATS University ↗
                             </a>
-                            <p class="text-xs text-theme-muted" data-i18n="edu-1-loc">Lahore, Pakistan · Top Tech &amp; Engineering University</p>
+                            <p class="text-xs text-theme-muted" data-i18n="edu-1-loc">Lahore, Pakistan · 2017 – 2021</p>
                         </div>
                         <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-1-desc">
                             Core foundation in computer systems architecture, embedded hardware programming, networking, data structures, and algorithms.
@@ -366,24 +381,20 @@
                 <div class="p-7 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 flex flex-col justify-between hover:border-purple-500/40 transition-all">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-pink-500/10 text-pink-600 dark:text-pink-400" data-i18n="edu-2-type">
-                                MASTER 1 (MSc)
-                            </span>
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-pink-500/10 text-pink-600 dark:text-pink-400" data-i18n="edu-2-type">MASTER 1 (MSc) · 2024 – 2026</span>
                             <i data-lucide="book-open" class="w-4 h-4 text-pink-500"></i>
                         </div>
-                        <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-2-title">Data Science &amp; Analytics</h3>
+                        <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-2-title">MSc Data Science &amp; AI (3 semesters, 90 ECTS)</h3>
                         <div class="space-y-1">
                             <a href="https://maps.google.com/?cid=6348805043946748990" target="_blank" rel="noreferrer" class="text-xs font-bold text-pink-600 dark:text-pink-400 hover:underline flex items-center gap-1">
                                 EPITA School of Computer Science ↗
                             </a>
                             <p class="text-xs text-theme-muted">Paris, France</p>
                         </div>
-                        <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-2-desc">
-                            Specialized coursework in data engineering architectures, distributed data processing, advanced machine learning, and database management.
-                        </p>
+                        <p class="text-xs text-theme-muted leading-relaxed pt-1" data-i18n="edu-2-desc">Coursework in data engineering architectures, distributed data processing, machine learning and database management. GPA 14.69/20.</p>
                     </div>
                     <div class="pt-3 border-t border-theme-border/60">
-                        <span class="text-[11px] font-mono text-pink-600 dark:text-pink-400 font-semibold" data-i18n="edu-done">Completed</span>
+                        <span class="text-[11px] font-mono text-pink-600 dark:text-pink-400 font-semibold" data-i18n="edu-done">3 semesters completed · 90 ECTS</span>
                     </div>
                 </div>
 
@@ -391,9 +402,7 @@
                 <div class="p-7 rounded-3xl bg-theme-card border border-theme-border card-shadow space-y-4 flex flex-col justify-between border-purple-500/30 hover:border-purple-500 transition-all">
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
-                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400" data-i18n="edu-3-type">
-                                MASTER 2 (M2)
-                            </span>
+                            <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400" data-i18n="edu-3-type">MASTER 2 (M2) · 2026 – 2027</span>
                             <i data-lucide="graduation-cap" class="w-4 h-4 text-purple-500"></i>
                         </div>
                         <h3 class="text-lg font-extrabold text-theme-text" data-i18n="edu-3-title">Systèmes Intelligents et Vision par Ordinateur (SIVO)</h3>
@@ -468,7 +477,7 @@
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
-                                <span><strong class="text-theme-text" data-i18n="exp-1-b4-k">Workflow Automation (Jira/Confluence):</strong> <span data-i18n="exp-1-b4-v">Led Jira &amp; Confluence administration; built custom workflows, JQL queries, and REST API automation scripts to streamline tracking, saving 15+ operational hours monthly.</span></span>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b4-k">Workflow Automation (Jira/Confluence):</strong> <span data-i18n="exp-1-b4-v">Led Jira &amp; Confluence administration; built custom workflows, JQL queries and REST API automation (Python, PowerShell) that saved 15+ hours per month and helped cut the global ticket backlog by 80% (1,000+ to under 200), with a 4.9/5 user satisfaction rating.</span></span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
@@ -476,7 +485,7 @@
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"></i>
-                                <span><strong class="text-theme-text" data-i18n="exp-1-b6-k">Server Migrations &amp; Governance:</strong> <span data-i18n="exp-1-b6-v">Collaborated with senior engineering leads to migrate legacy on-premises workloads to hybrid cloud environments; served as CAB Administrator enforcing ITIL change management to ensure zero downtime.</span></span>
+                                <span><strong class="text-theme-text" data-i18n="exp-1-b6-k">Change Management, Migrations &amp; Recovery:</strong> <span data-i18n="exp-1-b6-v">Led CAB change management (ITIL) for zero-downtime migrations of on-premises workloads to hybrid cloud; took part in full-site disaster recovery after a ransomware incident (~200 machines on-site within a 1,500-device global recovery).</span></span>
                             </li>
                         </ul>
                     </div>
@@ -501,8 +510,8 @@
                                 <span class="text-xs font-mono font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider">Next Generation Technology Solutions</span>
                                 <span class="text-xs text-theme-muted font-mono" data-i18n="exp-2-loc">• Lahore, Punjab, Pakistan (On-site)</span>
                             </div>
-                            <h3 class="text-2xl font-extrabold text-theme-text" data-i18n="exp-2-title">Systems &amp; Data Operations Engineer</h3>
-                            <p class="text-xs text-theme-muted font-semibold mt-0.5" data-i18n="exp-2-type">Full-time Role</p>
+                            <h3 class="text-2xl font-extrabold text-theme-text" data-i18n="exp-2-title">Technical Support Infrastructure Engineer</h3>
+                            <p class="text-xs text-theme-muted font-semibold mt-0.5" data-i18n="exp-2-type">Full-time</p>
                         </div>
                         <div class="text-left md:text-right">
                             <span class="inline-block text-xs font-mono font-bold px-3 py-1.5 rounded-full bg-pink-500/10 text-pink-600 dark:text-pink-400 border border-pink-500/20" data-i18n="exp-2-date">
@@ -516,7 +525,7 @@
                         <ul class="space-y-2.5 text-xs sm:text-sm text-theme-muted leading-relaxed">
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
-                                <span><strong class="text-theme-text" data-i18n="exp-2-b1-k">Database Operations &amp; SQL Maintenance:</strong> <span data-i18n="exp-2-b1-v">Executed relational database checks and SQL queries (PostgreSQL/MySQL) to audit data records, verify schema connectivity, and assist in operational data troubleshooting.</span></span>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b1-k">Identity &amp; Virtualization:</strong> <span data-i18n="exp-2-b1-v">Administered multi-site Active Directory, Entra ID / Office 365 and Okta SSO; managed VMware / Hyper-V virtualization and Veeam backup and recovery.</span></span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
@@ -528,7 +537,7 @@
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
-                                <span><strong class="text-theme-text" data-i18n="exp-2-b4-k">Telemetry &amp; Incident Data Metrics:</strong> <span data-i18n="exp-2-b4-v">Configured ITSM incident tracking workflows (ServiceNow) to structure operational logs and generate regular SLA performance and system uptime reports.</span></span>
+                                <span><strong class="text-theme-text" data-i18n="exp-2-b4-k">Telemetry &amp; Incident Data Metrics:</strong> <span data-i18n="exp-2-b4-v">Extracted and analyzed incident, network and uptime metrics (ServiceNow, VeloCloud, ITGlue) to produce monthly SLA reports for enterprise clients.</span></span>
                             </li>
                             <li class="flex items-start gap-2.5">
                                 <i data-lucide="check-circle-2" class="w-4 h-4 text-pink-500 flex-shrink-0 mt-0.5"></i>
@@ -538,10 +547,10 @@
                     </div>
 
                     <div class="pt-2 flex flex-wrap gap-2 font-mono text-xs">
-                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">SQL / PostgreSQL</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Active Directory &amp; Okta</span>
                         <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Shell Scripting</span>
                         <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Python</span>
-                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Database Admin</span>
+                        <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">Veeam</span>
                         <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">VMware ESXi</span>
                         <span class="px-2.5 py-1 rounded-md bg-gray-100 dark:bg-zinc-800 border border-theme-border text-theme-text">ServiceNow</span>
                     </div>
@@ -604,6 +613,8 @@
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Apache Airflow (DAGs &amp; Docker Operators)</span>
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">SQL / PostgreSQL &amp; Relational Modeling</span>
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Python (Pandas, ETL, REST API Ingestion)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">dbt Core (models &amp; tests)</span>
+                        <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">Snowflake (in progress)</span>
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">dbt (Data Build Tool) &amp; Medallion Architecture</span>
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">AWS Athena &amp; Glue Crawlers</span>
                         <span class="px-2.5 py-1.5 rounded-lg bg-gray-100 dark:bg-zinc-900 border border-theme-border text-theme-text">FastAPI Backend Services</span>
@@ -673,6 +684,46 @@
             <!-- Project Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="projects-grid">
 
+                <!-- Project Card 0: Weather ELT (CV flagship) -->
+                <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold font-mono px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400">
+                                ELT &amp; OBSERVABILITY
+                            </span>
+                            <span class="text-xs text-theme-muted font-mono">2026</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+                            Automated Weather ELT &amp; Observability Pipeline
+                        </h3>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-0-desc">
+                            Containerized ELT pipeline ingesting scheduled Weatherstack API snapshots into PostgreSQL (29 raw records to 29 deduplicated rows plus daily KPI aggregates). 3 dbt models with 12/12 unique and not_null tests passing in 2.5 s, orchestrated by Apache Airflow 3 (~8 s per DAG run, 0 failed runs) with Grafana dashboards.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Python</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Airflow 3</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">dbt Core</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">PostgreSQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Docker</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Grafana</span>
+                        </div>
+                    </div>
+                    <div class="pt-6 border-t border-theme-border space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
+                                <a href="https://github.com/Basitrehmankhattak/weather_data_project" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
+                                    <span>github.com/Basitrehmankhattak/weather_data_project</span>
+                                    <i data-lucide="external-link" class="w-3 h-3"></i>
+                                </a>
+                            </div>
+                            <a href="https://github.com/Basitrehmankhattak/weather_data_project" target="_blank" class="p-3 rounded-full bg-black text-white dark:bg-white dark:text-black hover:scale-105 transition-transform" title="View Code on GitHub">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Project Card 1 -->
                 <div class="project-card bg-theme-card border border-theme-border rounded-3xl p-7 card-shadow space-y-6 flex flex-col justify-between hover:border-purple-500/50 transition-all group">
                     <div class="space-y-4">
@@ -685,9 +736,7 @@
                         <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                             AWS Healthcare Big Data &amp; MLOps Platform
                         </h3>
-                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-1-desc">
-                            An event-driven Medallion (Bronze/Silver/Gold) data lake processing IoT telemetry and clinical batch records inside a private AWS VPC.
-                        </p>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-1-desc">Event-driven Bronze / Silver / Gold data lake on S3 with cross-region replication: Lambda-validated clinical files and IoT telemetry, EventBridge-triggered Step Functions workflows, Glue / PySpark jobs writing partitioned Parquet for Athena, SageMaker anomaly detection and a private VPC.</p>
                         
                         <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
                             <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">AWS S3</span>
@@ -705,7 +754,7 @@
                             <div>
                                 <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
                                 <a href="https://github.com/Basitrehmankhattak/aws-healthcare-bigdata-platform" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
-                                    <span>github.com/Basitrehmankhattak/healthcare-big-data-platform</span>
+                                    <span>github.com/Basitrehmankhattak/aws-healthcare-bigdata-platform</span>
                                     <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -728,9 +777,7 @@
                         <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
                             Semantic News Recommendation Platform
                         </h3>
-                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-2-desc">
-                            A multi-stage recommendation funnel on the Microsoft MIND dataset featuring sub-millisecond vector retrieval and diversity re-ranking.
-                        </p>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-2-desc">A multi-stage recommendation funnel on the Microsoft MIND dataset: FAISS vector retrieval, LightGBM ranking and MMR diversity re-ranking, served with FastAPI.</p>
                         
                         <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
                             <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Python</span>
@@ -748,7 +795,7 @@
                             <div>
                                 <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
                                 <a href="https://github.com/Basitrehmankhattak/news-recommendation-platform" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
-                                    <span>github.com/Basitrehmankhattak/news-recommendation-system</span>
+                                    <span>github.com/Basitrehmankhattak/news-recommendation-platform</span>
                                     <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -814,9 +861,7 @@
                         <h3 class="text-2xl font-extrabold text-theme-text group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                             HealthVision – End-to-End MLOps Medical Platform
                         </h3>
-                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-4-desc">
-                            An end-to-end clinical machine learning system with automated Airflow ingestion pipelines, schema validation, REST inference, interactive UI, and live Grafana monitoring.
-                        </p>
+                        <p class="text-theme-muted text-sm leading-relaxed" data-i18n="proj-4-desc">End-to-end MLOps platform: 2 Airflow DAGs for scheduled ingestion (schema and value validation, good / bad file routing, PostgreSQL load), a FastAPI /predict endpoint, a Streamlit UI and 3 Grafana monitoring groups; services run in Docker.</p>
                         
                         <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
                             <span class="px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-zinc-800 text-theme-text">Apache Airflow</span>
@@ -833,7 +878,7 @@
                             <div>
                                 <span class="text-[10px] font-mono text-theme-muted block" data-i18n="proj-repo">REPOSITORY LINK</span>
                                 <a href="https://github.com/Basitrehmankhattak/healthvision-diabetes-mlops" target="_blank" rel="noreferrer" class="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 mt-0.5">
-                                    <span>github.com/Basitrehmankhattak/HealthVision</span>
+                                    <span>github.com/Basitrehmankhattak/healthvision-diabetes-mlops</span>
                                     <i data-lucide="external-link" class="w-3 h-3"></i>
                                 </a>
                             </div>
@@ -858,9 +903,7 @@
                 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="cert-heading">
                     Certifications &amp; Training
                 </h2>
-                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="cert-sub">
-                    Formal industry certifications and specialized data engineering training paths. (You can add certificate badge images named cert1.jpg, cert2.jpg, etc. in your project folder).
-                </p>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="cert-sub">Formal industry certifications and specialized data engineering training paths.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1054,9 +1097,7 @@
                 <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text" data-i18n="contact-heading">
                     Let's discuss your internship opportunity.
                 </h2>
-                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="contact-sub">
-                    Seeking a 6-month End-of-Studies Master's Internship starting early 2027 in France. Drop me a message below or connect directly via email or GitHub.
-                </p>
+                <p class="text-theme-muted text-sm leading-relaxed" data-i18n="contact-sub">Seeking a 6-month End-of-Studies internship starting Feb/Mar 2027 in Île-de-France. Drop me a message below or connect via email, LinkedIn or GitHub.</p>
 
                 <div class="space-y-4 pt-2">
                     <a href="mailto:basitrehman97@gmail.com" class="flex items-center gap-3 p-4 rounded-2xl bg-theme-card border border-theme-border hover:border-purple-500/40 transition-all card-shadow">
@@ -1076,6 +1117,16 @@
                         <div>
                             <span class="text-[10px] font-mono text-theme-muted block" data-i18n="contact-git-lbl">GITHUB REPOSITORIES</span>
                             <span class="text-sm font-bold text-theme-text">github.com/Basitrehmankhattak</span>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/basitr-khattak/" target="_blank" rel="noreferrer" class="flex items-center gap-3 p-4 rounded-2xl bg-theme-card border border-theme-border hover:border-purple-500/40 transition-all card-shadow">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center font-bold">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-theme-muted block">LINKEDIN</span>
+                            <span class="text-sm font-bold text-theme-text">linkedin.com/in/basitr-khattak</span>
                         </div>
                     </a>
                 </div>
@@ -1122,9 +1173,7 @@
     <!-- FOOTER COPYRIGHT -->
     <footer class="border-t border-theme-border py-8 text-center text-xs text-theme-muted font-mono">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div data-i18n="footer-rights">
-                © 2026 Basit ur Rehman. Seeking End-of-Studies Master's Internship (Jan/Feb 2027).
-            </div>
+            <div data-i18n="footer-rights">© 2026 Basit ur Rehman. Seeking End-of-Studies Internship (Feb/Mar 2027).</div>
             <div class="flex items-center space-x-6">
                 <a href="#hero" class="hover:text-theme-text transition-colors" data-i18n="footer-top">Back to top ↑</a>
             </div>
@@ -1142,44 +1191,50 @@
                 "nav-projects": "Projects",
                 "nav-certs": "Certifications",
                 "btn-cv": "Download CV",
+                "page-title": "Basit ur Rehman — Data Engineer / Analytics Engineer Intern",
+                "cv-both": "Download both",
+                "cv-fr": "French CV (PDF)",
+                "cv-en": "English CV (PDF)",
+                "cv-title": "Choose a version",
+                "proj-0-desc": "Containerized ELT pipeline ingesting scheduled Weatherstack API snapshots into PostgreSQL (29 raw records to 29 deduplicated rows plus daily KPI aggregates). 3 dbt models with 12/12 unique and not_null tests passing in 2.5 s, orchestrated by Apache Airflow 3 (~8 s per DAG run, 0 failed runs) with Grafana dashboards.",
                 "btn-contact": "Get in touch",
-                "hero-badge": "Seeking 6-Month Master's Internship (Stage de fin d'études) · Jan/Feb 2027 · Whole France / Remote",
-                "hero-title-1": "Data Engineer | MLOps : Building scalable",
-                "hero-title-2": "Data Pipelines, MLOps",
-                "hero-title-3": "Cloud Infra.",
+                "hero-badge": "Seeking 6-Month End-of-Studies Internship (Stage de fin d'études) · Feb/Mar 2027 · Île-de-France",
+                "hero-title-1": "Data Engineer / Analytics Engineer Intern: Building tested",
+                "hero-title-2": "ELT Pipelines",
+                "hero-title-3": "Observable Data Platforms.",
                 "hero-desc-1": "Hi, I'm",
                 "hero-desc-2": "I bridge",
-                "hero-desc-3": "4+ years of hands-on Cloud Infrastructure experience at u-blox",
-                "hero-desc-4": "with advanced Master's studies in Data Science & Computer Vision in Paris.",
+                "hero-desc-3": "3+ years of hands-on production infrastructure experience at u-blox and NGT Sol",
+                "hero-desc-4": "with M2 studies in Intelligent Systems & Computer Vision in Paris.",
                 "hero-btn-contact": "Contact Me",
                 "hero-btn-github": "GitHub Profile",
-                "profile-subtitle": "Data Engineer | MLOps Specialist",
-                "profile-stat-text": "u-blox Cloud Infrastructure Experience",
+                "profile-subtitle": "Data Engineer / Analytics Engineer Intern",
+                "profile-stat-text": "Production Infrastructure Experience (u-blox, NGT Sol)",
                 "profile-target-title": "End-of-Studies Internship",
                 "about-tag": "Background",
                 "about-heading": "About Me",
                 "about-sub": "Combining industrial field experience with rigorous master's level studies in data engineering and intelligent systems.",
-                "about-p1": "M2 Student in Intelligent Systems & Computer Vision | Ex-Infrastructure Engineer (4+ Years)",
-                "about-p2": "Currently seeking a 6-month Master's End-of-Studies Internship (Stage de fin d'études) starting January / February 2027 in Whole France or Remote across Data Engineering, MLOps, or Cloud Architecture.",
-                "about-p3": "With over 4+ years of professional experience managing AWS/Azure hybrid infrastructure and automation pipelines at u-blox, I specialize in moving data models out of Jupyter Notebooks and building production-ready, containerized systems around them.",
-                "about-p4": "My academic background combines a B.S. in Computer Engineering, M1 coursework in Data Science & Analytics (EPITA), and a current M2 specialization in Intelligent Systems & Computer Vision (Université Sorbonne Paris Nord). This foundation allows me to bridge the gap between cloud infrastructure and machine learning handling every layer of the modern data stack from cloud orchestration to model deployment.",
+                "about-p1": "M2 Student in Intelligent Systems & Computer Vision | Ex-Infrastructure Engineer (3+ Years)",
+                "about-p2": "Seeking a <strong>6-month End-of-Studies Internship (Stage de fin d'études)</strong> starting <strong>February / March 2027</strong> in <strong>Île-de-France</strong> as a <strong>Data Engineer or Analytics Engineer</strong>. Convention de stage provided by Université Sorbonne Paris Nord.",
+                "about-p3": "With <strong>3+ years of production infrastructure experience</strong> at u-blox and NGT Sol, I build tested, observable ELT pipelines with Python, SQL, dbt Core, Airflow and Docker, and bring an operations mindset: monitoring, automation and data quality.",
+                "about-p4": "My background combines a B.S. in Computer Engineering, 3 semesters (90 ECTS) of the MSc Data Science & AI at EPITA, and a current M2 in Intelligent Systems & Computer Vision (Université Sorbonne Paris Nord). It lets me bridge cloud infrastructure and data engineering, from orchestration and warehousing to model serving.",
                 "about-target-label": "TARGET OBJECTIVE",
-                "about-target-val": "6-Month End-of-Studies Master's Internship (Stage de fin d'études)",
-                "about-target-sub": "Jan / Feb 2027 · Whole France / Remote · Data Engineering, MLOps, Cloud Architecture",
+                "about-target-val": "6-Month End-of-Studies Internship (Stage de fin d'études)",
+                "about-target-sub": "Feb / Mar 2027 · Île-de-France · Data Engineering, Analytics Engineering",
                 "about-cta": "Contact Me →",
                 "edu-tag": "Academic Journey",
                 "edu-heading": "Education",
                 "edu-sub": "A rigorous academic foundation spanning computer engineering, data science pipelines, and intelligent computer vision systems.",
                 "edu-1-type": "BACHELOR OF SCIENCE",
                 "edu-1-title": "B.S. Computer Engineering",
-                "edu-1-loc": "Lahore, Pakistan · Top Tech & Engineering University",
+                "edu-1-loc": "Lahore, Pakistan · 2017 – 2021",
                 "edu-1-desc": "Core foundation in computer systems architecture, embedded hardware programming, networking, data structures, and algorithms.",
                 "edu-grad": "Graduated",
-                "edu-2-type": "MASTER 1 (MSc)",
-                "edu-2-title": "Data Science & Analytics",
-                "edu-2-desc": "Specialized coursework in data engineering architectures, distributed data processing, advanced machine learning, and database management.",
-                "edu-done": "Completed",
-                "edu-3-type": "MASTER 2 (M2)",
+                "edu-2-type": "MASTER 1 (MSc) · 2024 – 2026",
+                "edu-2-title": "MSc Data Science & AI (3 semesters, 90 ECTS)",
+                "edu-2-desc": "Coursework in data engineering architectures, distributed data processing, machine learning and database management. GPA 14.69/20.",
+                "edu-done": "3 semesters completed · 90 ECTS",
+                "edu-3-type": "MASTER 2 (M2) · 2026 – 2027",
                 "edu-3-title": "Systèmes Intelligents et Vision par Ordinateur (SIVO)",
                 "edu-3-desc": "Advanced specialization in intelligent computer vision, neural networks, pattern recognition, spatial image processing, and deep learning algorithms.",
                 "edu-current": "Current M2 Student",
@@ -1198,23 +1253,23 @@
                 "exp-1-b3-k": "Scripting & System Automation:",
                 "exp-1-b3-v": "Developed Python scripts to automate daily system health checks, log parsing, and routine administrative workflows.",
                 "exp-1-b4-k": "Workflow Automation (Jira/Confluence):",
-                "exp-1-b4-v": "Led Jira & Confluence administration; built custom workflows, JQL queries, and REST API automation scripts to streamline tracking, saving 15+ operational hours monthly.",
+                "exp-1-b4-v": "Led Jira & Confluence administration; built custom workflows, JQL queries and REST API automation (Python, PowerShell) that saved 15+ hours per month and helped cut the global ticket backlog by 80% (1,000+ to under 200), with a 4.9/5 user satisfaction rating.",
                 "exp-1-b5-k": "System Monitoring & Dashboards:",
                 "exp-1-b5-v": "Configured Grafana telemetry dashboards and automated log alerts to track real-time infrastructure performance and service availability.",
-                "exp-1-b6-k": "Server Migrations & Governance:",
-                "exp-1-b6-v": "Collaborated with senior engineering leads to migrate legacy on-premises workloads to hybrid cloud environments; served as CAB Administrator enforcing ITIL change management to ensure zero downtime.",
+                "exp-1-b6-k": "Change Management, Migrations & Recovery:",
+                "exp-1-b6-v": "Led CAB change management (ITIL) for zero-downtime migrations of on-premises workloads to hybrid cloud; took part in full-site disaster recovery after a ransomware incident (~200 machines on-site within a 1,500-device global recovery).",
                 "exp-2-loc": "• Lahore, Punjab, Pakistan (On-site)",
-                "exp-2-title": "Systems & Data Operations Engineer",
-                "exp-2-type": "Full-time Role",
+                "exp-2-title": "Technical Support Infrastructure Engineer",
+                "exp-2-type": "Full-time",
                 "exp-2-date": "Sep 2021 – May 2022 · 9 mos",
-                "exp-2-b1-k": "Database Operations & SQL Maintenance:",
-                "exp-2-b1-v": "Executed relational database checks and SQL queries (PostgreSQL/MySQL) to audit data records, verify schema connectivity, and assist in operational data troubleshooting.",
+                "exp-2-b1-k": "Identity & Virtualization:",
+                "exp-2-b1-v": "Administered multi-site Active Directory, Entra ID / Office 365 and Okta SSO; managed VMware / Hyper-V virtualization and Veeam backup and recovery.",
                 "exp-2-b2-k": "Log Parsing & Diagnostic Scripting:",
                 "exp-2-b2-v": "Developed custom shell and Python diagnostic scripts to parse system logs, automate routine server health checks, and resolve network/authentication bottlenecks.",
                 "exp-2-b3-k": "Server Administration & Virtualization:",
                 "exp-2-b3-v": "Delivered L2 infrastructure support across Linux and Windows server environments; executed routine server provisioning, virtualization setups (VMware ESXi), and security patch management.",
                 "exp-2-b4-k": "Telemetry & Incident Data Metrics:",
-                "exp-2-b4-v": "Configured ITSM incident tracking workflows (ServiceNow) to structure operational logs and generate regular SLA performance and system uptime reports.",
+                "exp-2-b4-v": "Extracted and analyzed incident, network and uptime metrics (ServiceNow, VeloCloud, ITGlue) to produce monthly SLA reports for enterprise clients.",
                 "exp-2-b5-k": "Technical SOPs & Compliance:",
                 "exp-2-b5-v": "Drafted and maintained technical deployment checklists, standard operating procedures (SOPs), and system configuration guides to enforce infrastructure compliance.",
                 "skills-tag": "Tech Stack & Proficiency",
@@ -1230,10 +1285,10 @@
                 "skill-c4-sub": "Virtualization & Télémétrie",
                 "proj-tag": "Portfolio Work",
                 "proj-heading": "Featured Engineering Projects",
-                "proj-1-desc": "An event-driven Medallion (Bronze/Silver/Gold) data lake processing IoT telemetry and clinical batch records inside a private AWS VPC.",
-                "proj-2-desc": "A multi-stage recommendation funnel on the Microsoft MIND dataset featuring sub-millisecond vector retrieval and diversity re-ranking.",
+                "proj-1-desc": "Event-driven Bronze / Silver / Gold data lake on S3 with cross-region replication: Lambda-validated clinical files and IoT telemetry, EventBridge-triggered Step Functions workflows, Glue / PySpark jobs writing partitioned Parquet for Athena, SageMaker anomaly detection and a private VPC.",
+                "proj-2-desc": "A multi-stage recommendation funnel on the Microsoft MIND dataset: FAISS vector retrieval, LightGBM ranking and MMR diversity re-ranking, served with FastAPI.",
                 "proj-3-desc": "An enterprise-grade, leak-free machine learning pipeline refactored into a modular Python package with strict code quality standards and automated CI/CD.",
-                "proj-4-desc": "An end-to-end clinical machine learning system with automated Airflow ingestion pipelines, schema validation, REST inference, interactive UI, and live Grafana monitoring.",
+                "proj-4-desc": "End-to-end MLOps platform: 2 Airflow DAGs for scheduled ingestion (schema and value validation, good / bad file routing, PostgreSQL load), a FastAPI /predict endpoint, a Streamlit UI and 3 Grafana monitoring groups; services run in Docker.",
                 "proj-repo": "REPOSITORY LINK",
                 "cert-tag": "Verified Credentials",
                 "cert-heading": "Certifications & Training",
@@ -1246,7 +1301,7 @@
                 "cert-6-desc": "Training in IT Service Management methodologies, ITIL change management, and incident workflows utilizing Jira Service Management.",
                 "contact-tag": "Get in Touch",
                 "contact-heading": "Let's discuss your internship opportunity.",
-                "contact-sub": "Seeking a 6-month End-of-Studies Master's Internship starting early 2027 in France. Drop me a message below or connect directly via email or GitHub.",
+                "contact-sub": "Seeking a 6-month End-of-Studies internship starting Feb/Mar 2027 in Île-de-France. Drop me a message below or connect via email, LinkedIn or GitHub.",
                 "contact-email-lbl": "DIRECT EMAIL",
                 "contact-git-lbl": "GITHUB REPOSITORIES",
                 "form-title": "Send a Direct Message",
@@ -1256,7 +1311,7 @@
                 "form-msg": "Message",
                 "form-btn": "Send Message",
                 "form-success": "✓ Message prepared! Opening your mail client to send to basitrehman97@gmail.com...",
-                "footer-rights": "© 2026 Basit ur Rehman. Seeking End-of-Studies Master's Internship (Jan/Feb 2027).",
+                "footer-rights": "© 2026 Basit ur Rehman. Seeking End-of-Studies Internship (Feb/Mar 2027).",
                 "footer-top": "Back to top ↑"
             },
             fr: {
@@ -1267,44 +1322,50 @@
                 "nav-projects": "Projets",
                 "nav-certs": "Certifications",
                 "btn-cv": "Télécharger CV",
+                "page-title": "Basit ur Rehman — Stage Data Engineer / Analytics Engineer",
+                "cv-both": "Télécharger les deux",
+                "cv-fr": "CV en français (PDF)",
+                "cv-en": "CV en anglais (PDF)",
+                "cv-title": "Choisir une version",
+                "proj-0-desc": "Pipeline ELT conteneurisé ingérant des relevés planifiés de l'API Weatherstack dans PostgreSQL (29 enregistrements bruts → 29 lignes dédupliquées, plus agrégats KPI quotidiens). 3 modèles dbt avec 12/12 tests unique et not_null réussis en 2,5 s, orchestrés par Apache Airflow 3 (~8 s par DAG, 0 exécution en échec) avec tableaux de bord Grafana.",
                 "btn-contact": "Me contacter",
-                "hero-badge": "Recherche Stage de fin d'études (M2) · Janv/Fév 2027 · Toute la France / Télétravail",
-                "hero-title-1": "Ingénieur Data | MLOps : Conception de",
-                "hero-title-2": "Pipelines Data, MLOps",
-                "hero-title-3": "& Infrastructure Cloud.",
+                "hero-badge": "Recherche stage de fin d'études (6 mois) · Fév/Mars 2027 · Île-de-France",
+                "hero-title-1": "Stage Data Engineer / Analytics Engineer : pipelines ELT testés,",
+                "hero-title-2": "plateformes data",
+                "hero-title-3": "observables.",
                 "hero-desc-1": "Bonjour, je suis",
                 "hero-desc-2": "Je combine",
-                "hero-desc-3": "4+ ans d'expérience pratique en infrastructure cloud chez u-blox",
-                "hero-desc-4": "avec des études approfondies en Master de Data Science & Vision par Ordinateur à Paris.",
+                "hero-desc-3": "3+ ans d'expérience en infrastructure de production chez u-blox et NGT Sol",
+                "hero-desc-4": "avec un M2 Systèmes Intelligents & Vision par Ordinateur à Paris.",
                 "hero-btn-contact": "Me Contacter",
                 "hero-btn-github": "Profil GitHub",
-                "profile-subtitle": "Ingénieur Data | Spécialiste MLOps",
-                "profile-stat-text": "Expérience Infrastructure Cloud u-blox",
+                "profile-subtitle": "Stage Data Engineer / Analytics Engineer",
+                "profile-stat-text": "Expérience infrastructure de production (u-blox, NGT Sol)",
                 "profile-target-title": "Stage de Fin d'Études",
                 "about-tag": "Parcours",
                 "about-heading": "À Propos de Moi",
                 "about-sub": "Alliant expérience industrielle sur le terrain et formation universitaire rigoureuse en ingénierie des données et systèmes intelligents.",
-                "about-p1": "Étudiant en M2 Systèmes Intelligents & Vision par Ordinateur | Ex-Ingénieur Infrastructure (4+ Ans)",
-                "about-p2": "Actuellement à la recherche d'un <strong>Stage de fin d'études de 6 mois</strong> débutant en <strong>janvier / février 2027</strong> en <strong>toute la France ou en télétravail</strong> en tant qu'ingénieur Data, MLOps ou Cloud.",
-                "about-p3": "Fort de plus de <strong>4 ans d'expérience professionnelle</strong> dans la gestion d'infrastructures cloud hybrides et de pipelines d'automatisation chez u-blox, je me spécialise dans le passage des modèles de données des notebooks Jupyter vers des systèmes conteneurisés prêts pour la production.",
-                "about-p4": "Mon parcours combine un Bachelor en Génie Informatique, un M1 en Data Science & Analytics (EPITA), et une spécialisation actuelle en M2 SIVO (Université Sorbonne Paris Nord). Cela me permet de faire le pont entre l'infrastructure cloud et le machine learning de bout en bout.",
+                "about-p1": "Étudiant en M2 Systèmes Intelligents & Vision par Ordinateur | Ex-Ingénieur Infrastructure (3+ ans)",
+                "about-p2": "À la recherche d'un <strong>stage de fin d'études de 6 mois</strong> débutant en <strong>février / mars 2027</strong> en <strong>Île-de-France</strong> en tant que <strong>Data Engineer ou Analytics Engineer</strong>. Convention de stage fournie par l'Université Sorbonne Paris Nord.",
+                "about-p3": "Fort de <strong>plus de 3 ans d'expérience en infrastructure de production</strong> chez u-blox et NGT Sol, je conçois des pipelines ELT testés et observables avec Python, SQL, dbt Core, Airflow et Docker, avec une approche orientée exploitation : supervision, automatisation et qualité des données.",
+                "about-p4": "Mon parcours combine une licence en génie informatique, 3 semestres (90 ECTS) du MSc Data Science & AI à l'EPITA, et un M2 SIVO en cours (Université Sorbonne Paris Nord). Il me permet de faire le pont entre infrastructure cloud et data engineering, de l'orchestration et de l'entrepôt de données jusqu'au déploiement de modèles.",
                 "about-target-label": "OBJECTIF PRINCIPAL",
-                "about-target-val": "Stage de Fin d'Études de 6 Mois (Master 2)",
-                "about-target-sub": "Janv / Fév 2027 · Toute la France / Télétravail · Data Engineering, MLOps, Cloud",
+                "about-target-val": "Stage de fin d'études de 6 mois",
+                "about-target-sub": "Fév / Mars 2027 · Île-de-France · Data Engineering, Analytics Engineering",
                 "about-cta": "Me Contacter →",
                 "edu-tag": "Parcours Académique",
                 "edu-heading": "Formation",
                 "edu-sub": "Un socle académique rigoureux couvrant le génie informatique, les pipelines de données et la vision par ordinateur.",
                 "edu-1-type": "BAC+4 / BACHELOR",
                 "edu-1-title": "B.S. Génie Informatique",
-                "edu-1-loc": "Lahore, Pakistan · Université technologique de premier plan",
+                "edu-1-loc": "Lahore, Pakistan · 2017 – 2021",
                 "edu-1-desc": "Fondations en architecture des systèmes informatiques, programmation embarquée, réseaux, structures de données et algorithmes.",
                 "edu-grad": "Diplômé",
-                "edu-2-type": "MASTER 1 (MSc)",
-                "edu-2-title": "Data Science & Analytics",
-                "edu-2-desc": "Cours spécialisés en architectures de données, traitement distribué, machine learning avancé et gestion de bases de données.",
-                "edu-done": "Validé",
-                "edu-3-type": "MASTER 2 (M2)",
+                "edu-2-type": "MASTER 1 (MSc) · 2024 – 2026",
+                "edu-2-title": "MSc Data Science & AI (3 semestres, 90 ECTS)",
+                "edu-2-desc": "Cours en architectures data, traitement distribué, machine learning et gestion de bases de données. Moyenne 14,69/20.",
+                "edu-done": "3 semestres validés · 90 ECTS",
+                "edu-3-type": "MASTER 2 (M2) · 2026 – 2027",
                 "edu-3-title": "Systèmes Intelligents et Vision par Ordinateur (SIVO)",
                 "edu-3-desc": "Spécialisation avancée en vision par ordinateur intelligente, réseaux de neurones, reconnaissance de formes et apprentissage profond.",
                 "edu-current": "Étudiant en M2 Actuel",
@@ -1323,23 +1384,23 @@
                 "exp-1-b3-k": "Scripting & Automatisation Système :",
                 "exp-1-b3-v": "Développement de scripts Python pour automatiser les bilans de santé quotidiens, l'analyse de logs et les flux administratifs.",
                 "exp-1-b4-k": "Automatisation des Workflows (Jira/Confluence) :",
-                "exp-1-b4-v": "Administration Jira & Confluence ; création de workflows personnalisés et scripts d'automatisation REST API (gain de 15+ heures par mois).",
+                "exp-1-b4-v": "Administration Jira & Confluence ; workflows, requêtes JQL et automatisations API REST (Python, PowerShell) : plus de 15 heures économisées par mois, réduction de 80 % du backlog mondial de tickets (de plus de 1 000 à moins de 200) et satisfaction utilisateurs de 4,9/5.",
                 "exp-1-b5-k": "Supervision & Tableaux de Bord :",
                 "exp-1-b5-v": "Configuration de tableaux de bord Grafana et alertes automatisées pour suivre les performances et la disponibilité des services.",
-                "exp-1-b6-k": "Migrations de Serveurs & Gouvernance :",
-                "exp-1-b6-v": "Migration de charges de travail vers des environnements cloud hybrides ; rôle d'administrateur CAB appliquant la gestion des changements ITIL.",
+                "exp-1-b6-k": "Gestion des changements, migrations & reprise :",
+                "exp-1-b6-v": "Pilotage de la gestion des changements (CAB, ITIL) pour des migrations sans interruption vers le cloud hybride ; participation à la reprise après une attaque par ransomware (~200 machines sur site, dans une reprise mondiale de 1 500 appareils).",
                 "exp-2-loc": "• Lahore, Pendjab, Pakistan (Sur site)",
-                "exp-2-title": "Ingénieur Opérations Systèmes & Data",
-                "exp-2-type": "Temps Plein",
+                "exp-2-title": "Technical Support Infrastructure Engineer",
+                "exp-2-type": "Temps plein",
                 "exp-2-date": "Sep 2021 – Mai 2022 · 9 mois",
-                "exp-2-b1-k": "Opérations BDD & Maintenance SQL :",
-                "exp-2-b1-v": "Exécution de requêtes SQL (PostgreSQL/MySQL) pour auditer les données, vérifier la connectivité et résoudre les problèmes opérationnels.",
+                "exp-2-b1-k": "Identité & virtualisation :",
+                "exp-2-b1-v": "Administration d'Active Directory multi-sites, Entra ID / Office 365 et Okta SSO ; gestion de la virtualisation VMware / Hyper-V et des sauvegardes Veeam.",
                 "exp-2-b2-k": "Analyse de Logs & Scripts de Diagnostic :",
                 "exp-2-b2-v": "Création de scripts shell et Python pour analyser les logs système, automatiser les contrôles de santé et résoudre les goulots d'étranglement.",
                 "exp-2-b3-k": "Administration Serveurs & Virtualisation :",
                 "exp-2-b3-v": "Support infrastructure L2 sur environnements Linux et Windows ; provisionnement de serveurs, virtualisation (VMware ESXi) et correctifs de sécurité.",
                 "exp-2-b4-k": "Métriques de Télémétrie & Incidents :",
-                "exp-2-b4-v": "Configuration des flux ITSM (ServiceNow) pour structurer les journaux opérationnels et générer des rapports de performance SLA.",
+                "exp-2-b4-v": "Extraction et analyse des indicateurs d'incidents, de réseau et de disponibilité (ServiceNow, VeloCloud, ITGlue) pour produire des rapports mensuels de SLA pour des clients entreprise.",
                 "exp-2-b5-k": "SOPs Techniques & Conformité :",
                 "exp-2-b5-v": "Rédaction et mise à jour de checklists de déploiement et de guides de configuration pour assurer la conformité de l'infrastructure.",
                 "skills-tag": "Stack Technique & Maîtrise",
@@ -1355,10 +1416,10 @@
                 "skill-c4-sub": "Virtualisation & Télémétrie",
                 "proj-tag": "Projets Portfolio",
                 "proj-heading": "Projets d'Ingénierie Phares",
-                "proj-1-desc": "Un lac de données Medallion (Bronze/Silver/Gold) piloté par événements traitant la télémétrie IoT et les dossiers cliniques dans un VPC AWS privé.",
-                "proj-2-desc": "Un entonnoir de recommandation multi-étages sur le jeu de données Microsoft MIND avec recherche vectorielle sub-milliseconde et ré-classement par diversité.",
+                "proj-1-desc": "Data lake événementiel Bronze / Silver / Gold sur S3 avec réplication inter-régions : fichiers cliniques validés par Lambda et télémétrie IoT, workflows Step Functions déclenchés via EventBridge, jobs Glue / PySpark vers Parquet partitionné pour Athena, détection d'anomalies SageMaker et VPC privé.",
+                "proj-2-desc": "Un entonnoir de recommandation multi-étages sur le jeu de données Microsoft MIND : recherche vectorielle FAISS, classement LightGBM et ré-classement par diversité (MMR), servi avec FastAPI.",
                 "proj-3-desc": "Pipeline de machine learning industrialisé sans fuite de données, refactorisé en package Python modulaire avec normes de qualité strictes et CI/CD automatisée.",
-                "proj-4-desc": "Système de ML clinique de bout en bout avec pipelines d'ingestion Airflow automatisés, validation de schéma, inférence REST, interface interactive et supervision Grafana.",
+                "proj-4-desc": "Plateforme MLOps de bout en bout : 2 DAG Airflow d'ingestion planifiée (validation du schéma et des valeurs, routage good / bad, chargement PostgreSQL), endpoint FastAPI /predict, interface Streamlit et 3 groupes de supervision Grafana ; services sous Docker.",
                 "proj-repo": "LIEN DU DÉPÔT",
                 "cert-tag": "Certifications Vérifiées",
                 "cert-heading": "Certifications & Formations",
@@ -1371,7 +1432,7 @@
                 "cert-6-desc": "Formation aux méthodologies de gestion des services informatiques (ITSM), gestion des changements ITIL et workflows d'incidents Jira Service Management.",
                 "contact-tag": "Contact",
                 "contact-heading": "Discutons de votre opportunité de stage.",
-                "contact-sub": "Recherche un stage de fin d'études M2 de 6 mois débutant début 2027 en France. Envoyez-moi un message ci-dessous ou contactez-moi par e-mail / GitHub.",
+                "contact-sub": "Recherche un stage de fin d'études de 6 mois débutant en février/mars 2027 en Île-de-France. Envoyez-moi un message ci-dessous ou contactez-moi par e-mail, LinkedIn ou GitHub.",
                 "contact-email-lbl": "E-MAIL DIRECT",
                 "contact-git-lbl": "DÉPÔTS GITHUB",
                 "form-title": "Envoyer un Message Direct",
@@ -1381,28 +1442,71 @@
                 "form-msg": "Message",
                 "form-btn": "Envoyer le Message",
                 "form-success": "✓ Message préparé ! Ouverture de votre client mail pour l'envoyer à basitrehman97@gmail.com...",
-                "footer-rights": "© 2026 Basit ur Rehman. Recherche Stage de Fin d'Études (Janv/Fév 2027).",
+                "footer-rights": "© 2026 Basit ur Rehman. Recherche stage de fin d'études (Fév/Mars 2027).",
                 "footer-top": "Retour en haut ↑"
             }
         };
 
         let currentLang = 'en';
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'fr' : 'en';
-            document.getElementById('lang-label').innerText = currentLang.toUpperCase();
-            
-            // Translate all elements with data-i18n attribute
+        function applyLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.getElementById('lang-label').innerText = lang.toUpperCase();
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.innerHTML = translations[currentLang][key];
-                }
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
+            if (translations[lang]['page-title']) document.title = translations[lang]['page-title'];
         }
+
+        function toggleLanguage() {
+            applyLanguage(currentLang === 'en' ? 'fr' : 'en');
+        }
+
+        // ---- CV download selector (English / French / both) ----
+        // Put these PDF files in the same folder as index.html (or edit the paths).
+        const CV_FILES = {
+            en: { url: 'Basit_Ur_Rehman_CV_Data_Engineer_Stage_2027.pdf',    name: 'Basit_Ur_Rehman_CV_EN.pdf' },
+            fr: { url: 'Basit_Ur_Rehman_CV_FR_Data_Engineer_Stage_2027.pdf', name: 'Basit_Ur_Rehman_CV_FR.pdf' }
+        };
+
+        function closeCvMenus() {
+            document.querySelectorAll('.cv-panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.cv-menu > button').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        }
+
+        function toggleCvMenu(id) {
+            const panel = document.querySelector('#' + id + ' .cv-panel');
+            const wasHidden = panel.classList.contains('hidden');
+            closeCvMenus();
+            if (wasHidden) {
+                panel.classList.remove('hidden');
+                document.querySelector('#' + id + ' > button').setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function downloadCV(which) {
+            const keys = which === 'both' ? ['en', 'fr'] : [which];
+            keys.forEach((k, i) => {
+                setTimeout(() => {
+                    const a = document.createElement('a');
+                    a.href = CV_FILES[k].url;
+                    a.download = CV_FILES[k].name;
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                }, i * 700); // small delay so browsers allow the second download
+            });
+            closeCvMenus();
+        }
+
+        document.addEventListener('click', (e) => { if (!e.target.closest('.cv-menu')) closeCvMenus(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCvMenus(); });
 
         // Initialize Lucide Icons & Interactivity
         document.addEventListener('DOMContentLoaded', () => {
+            applyLanguage('en');
             lucide.createIcons();
 
             // Light / Dark Theme Switcher
